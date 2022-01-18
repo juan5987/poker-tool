@@ -1,0 +1,87 @@
+.chipElement{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+        &__img{
+            width: 55px;
+            height: 55px;
+            margin-right: 1rem;
+            border: 2px solid #f2f2f2;
+            background-color: #f2f2f2;
+            border-radius: 50%;
+            position: relative;
+            top: 7px;
+        }
+
+        &__field{
+
+            display: flex;
+            flex-direction: column;
+
+            &__label{
+                color: #ee581e;
+                font-size: 0.8rem;
+                font-weight: bold;
+                margin-bottom: 0.2rem;
+                padding-left: 0.1rem;
+            }
+    
+            &__inputColor{
+                width: 45px;
+                height: 45px;
+                margin-right: 1rem;
+            }
+
+            &__inputNumber{
+                width: 70px;
+                padding: 0.5rem;
+                margin-right: 1rem;
+                font-size: 1.3rem;
+                font-weight: bold;
+            }
+
+            &__logo{
+                display: flex;
+                align-items: center;
+                margin-top: 0.8rem;
+                margin-right: 1rem;
+                color: #f2f2f2;
+
+                &:hover{
+                    color: #ee581e;
+                    cursor: pointer;
+                }
+            }
+        }
+}
+
+@media all and (max-width: 550px){
+
+    .chipElement{
+
+        justify-content: space-around;
+
+        &__img{
+            display: none;
+        }
+
+        &__field{
+
+            &__inputColor{
+                margin-right: 0.5rem;
+            }
+
+            &__inputNumber{
+
+                width: 60px;
+                margin-right: 0.5rem;
+            }
+
+            &__logo{
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}

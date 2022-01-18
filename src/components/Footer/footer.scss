@@ -1,0 +1,19 @@
+.footer{
+    background-color: #19191e;
+    padding: 1.5rem;
+    color: #f2f2f2;
+
+    &__nav{
+        display: flex;
+        justify-content: flex-start;
+
+        &__element{
+            margin-right: 2rem;
+
+            &:hover{
+                color: #ee581e;
+                cursor: pointer;
+            }
+        }
+    }
+}

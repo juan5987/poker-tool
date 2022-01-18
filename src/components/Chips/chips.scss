@@ -1,0 +1,29 @@
+.distributor__body__form__infos{
+    margin: 1rem auto;
+    width: 100%;
+
+    &__paragraph{
+        padding: 1rem;
+        border: 1px solid white;
+        text-align: left;
+    }
+}
+
+.distributor__body__form__errorMessage, .distributor__body__form__successMessage{
+    margin-top: 1rem;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.distributor__body__form__errorMessage{
+    color: red;
+    border: 1px solid red;
+}
+
+.distributor__body__form__successMessage{
+    color: green;
+    border: 1px solid green;
+}
+
+
+

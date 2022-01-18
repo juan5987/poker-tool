@@ -1,0 +1,103 @@
+.inscriptionForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #19191e;
+
+    &__errorMessage{
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: red;
+        border: 2px solid red;
+        padding: 1rem;
+        max-width: 400px;
+    }
+
+    &__input{
+        width: 400px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+
+        &::placeholder{
+            color: black;
+        }
+    }
+
+    &__label{
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.3rem;
+        color: #ee581e;
+        font-weight: bold;
+    }
+
+    &__submit{
+        background-color: #ee581e;
+        color: #f2f2f2;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid #19191e;
+        margin-top: 0.5rem;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #19191e;
+            border: 2px solid #f2f2f2;
+            color: #EE581E;
+        }
+    }
+
+    &__forgotPassword{
+        text-align: left;
+        margin-bottom: 2rem;
+        width: 400px;
+    }
+
+    &__forgotPasswordLink{
+        text-decoration: underline;
+
+        &:hover{
+            cursor: pointer;
+            color: #EE581E;
+        }
+    }
+
+    &__passwordVisibilityToggler{
+        position: relative;
+        height: 0;
+        color: black;
+        width: 100%;
+        background-color: red;
+
+        &__icon{
+            line-height: 100%;
+            position: absolute;
+            right: 10px;
+            bottom: 42px;
+
+            &:hover{
+                cursor: pointer;
+                color: #EE581E;
+            }
+        }
+    }
+}
+
+.signUpError{
+    max-width: 400px;
+    text-align: center;
+}
+
+@media all and (max-width: 550px){
+    .inscriptionForm{
+
+        &__input{
+            width: 100%;
+        }
+    }
+}

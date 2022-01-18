@@ -1,0 +1,335 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    padding: 1rem;
+    color: #f2f2f2;
+    position: relative;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 60px;
+
+    &__logo{
+        display: flex;
+        align-items: center;
+
+
+        &__img{
+            width: 60px;
+            height: 60px;
+            margin-right: 0.5rem;
+
+        }
+
+        &__title{
+            font-size: 3rem;
+            font-weight: bold;
+            display: inline-block;
+            min-width: min-content
+        }
+    }
+
+    &__hamburgerIcon{
+        display: none;
+    }
+
+    &__navbar{
+            display: flex;
+    
+            &__element{
+                display: block;
+                margin-right: 2rem;
+                font-weight: bold;
+                font-size: 1.1rem;
+                border-bottom: 2px solid #000000;
+                padding: 0.3rem 0;
+                transition: 0.3s;
+    
+                &--selected{
+                    color: #EE581E;
+                    border-bottom: 2px solid #EE581E;
+                }
+
+                &:hover{
+                    cursor: pointer;
+                    color: #EE581E;
+                }
+            }
+    }
+
+    &__responsiveNavbar{
+        display : flex;
+        flex-direction: column;
+        text-align: center;
+        background-color: black;
+        padding: 2rem;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: -100%;
+        z-index: 110;
+        margin-top: 92px;
+        transition: right .5s ease-out;
+
+
+        &__element{
+            margin-bottom: 2rem;
+            font-size: 2rem;
+
+            &:hover{
+                color: #ee581e;
+            }
+        }
+
+        &--open{
+            right: 0;
+        }
+    }
+
+    &__connexion{
+
+        &__button{
+            background-color: #EE581E;
+            border: 2px solid #000000;
+            color: #f2f2f2;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s ;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
+        }
+    }
+}
+
+.invisible{
+    display: none;
+}
+
+.connexionForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #19191e;
+
+    &__errorMessage{
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: red;
+        border: 2px solid red;
+        padding: 1rem;
+        max-width: 400px;
+    }
+
+    &__firstConnectionMessage{
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: green;
+        border: 2px solid green;
+        padding: 1rem;
+        max-width: 400px;
+    }
+
+    &__input{
+        width: 400px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+
+        &::placeholder{
+            color: black;
+        }
+    }
+
+    &__label{
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.3rem;
+        color: #ee581e;
+        font-weight: bold;
+    }
+
+    &__submit{
+        background-color: #ee581e;
+        color: #f2f2f2;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid #19191e;
+        margin-top: 0.5rem;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #19191e;
+            border: 2px solid #f2f2f2;
+            color: #EE581E;
+        }
+    }
+
+    &__forgotPassword{
+        display: flex;
+        text-align: left;
+        margin-bottom: 2rem;
+        text-decoration: underline;
+
+        &:hover{
+            cursor: pointer;
+            color: #EE581E;
+        }
+    }
+
+    &__passwordVisibilityToggler{
+        position: relative;
+        height: 0;
+        color: black;
+        width: 100%;
+        background-color: red;
+
+        &__icon{
+            line-height: 100%;
+            position: absolute;
+            right: 10px;
+            bottom: 42px;
+
+            &:hover{
+                cursor: pointer;
+                color: #EE581E;
+            }
+        }
+    }
+}
+
+.modalUnauthorized{
+
+    padding: 2rem;
+  
+    &__paragraph{
+      margin-bottom: 2rem;
+  
+      &:last-child{
+        margin-bottom: 0;
+      }
+    }
+  
+    &__button{
+      color: #EE581E;
+      background-color: #19191e;
+      border: none;
+      font-size: 1.1rem;
+      text-decoration: underline;
+  
+      &:hover{
+        cursor: pointer;
+        color: #f2f2f2;
+      }
+    }
+  }
+
+.invisible{
+    display: none;
+}
+
+
+@media all and (max-width: 1300px) {
+
+    .header{
+
+        &__navbar{
+
+            display: none;
+        }
+
+        &__connexion{
+
+            display: none;
+        }
+
+        &__hamburgerIcon{
+            display: block;
+            position: relative;
+            width: 33px;
+            height: 28px;
+            z-index: 100;
+            user-select: none;
+            cursor: pointer;
+
+            &--open span:nth-child(1){
+
+                width: 110%;
+                transform: rotate(45deg);
+            }
+            &--open span:nth-child(2){
+                width: 0%;
+                opacity: 0;
+            }
+            &--open span:nth-child(3){
+
+                width: 110%;
+                transform: rotate(-45deg);
+            }
+        }
+
+        &__hamburgerIcon span{
+            display: block;
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            margin-bottom: 5px;
+            background: #e2e2e2;
+            border-radius: 3px;
+            z-index: 100;
+            opacity: 1;
+            left: 0;
+            transform : rotate(0deg);
+            transition: .25s ease-in-out;
+
+            &:nth-child(1){
+                top: 0px;
+                transform-origin: left top;
+            }
+            &:nth-child(2){
+                top: 12px;
+                transform-origin: left center;
+            }
+            &:nth-child(3){
+                top: 24px;
+                transform-origin: left bottom;
+            }
+        }
+
+
+    }
+}
+
+@media all and (max-width: 550px) {
+
+    .header{
+        position: fixed;
+    }
+
+    .header__logo__img{
+        display: none;
+    }
+
+    .connexionForm{
+
+        &__input{
+            width: 100%;
+        }
+    }
+
+    .header__connexion__button{
+        font-size: 2rem;
+    }
+}

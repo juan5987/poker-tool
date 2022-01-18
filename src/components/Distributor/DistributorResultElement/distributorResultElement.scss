@@ -1,0 +1,22 @@
+.element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: .8rem;
+
+    &__img{
+        width: 80px;
+        height: 80px;
+        border: 2px solid #f2f2f2;
+        background-color: #f2f2f2;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+    }
+
+    &__value{
+        color: #f2f2f2;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}

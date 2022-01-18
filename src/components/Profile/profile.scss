@@ -1,0 +1,161 @@
+.profile{
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+    background-image: url("../../assets/images/bg-timer.png");
+    background-size: cover;
+    background-position: center;
+
+    &__body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #19191E;
+        width: min-content;
+        margin: 0.5rem auto;
+        padding: 2rem;
+        color: white;
+        flex-grow: 1;
+
+        &__form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #19191e;
+
+            &__subtitle{
+                color: #f2f2f2;
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
+
+            &__input{
+                width: 400px;
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+                font-size: 1.3rem;
+                font-weight: bold;
+
+                &::placeholder{
+                    color: black;
+                }
+
+                &:disabled{
+                    background-color: #c0c0c0;
+                    border: none;
+                }
+
+                &::placeholder{
+                    color: grey;
+                    font-weight: 100;
+                    font-size: 0.8em;
+                }
+            }
+
+            &__inputInfos{
+                font-size: 0.7em;
+                position: relative;
+                bottom: 20px;
+                right: 15px;
+
+                &__passwordVisibilityToggler{
+                    position: relative;
+                    height: 0;
+                    color: black;
+                    width: 100%;
+                    background-color: red;
+            
+                    &__icon{
+                        line-height: 100%;
+                        position: absolute;
+                        right: 10px;
+                        bottom: 53px;
+            
+                        &:hover{
+                            cursor: pointer;
+                            color: #EE581E;
+                        }
+                    }
+                }
+            }
+
+            &__label{
+                width: 100%;
+                text-align: left;
+                margin-bottom: 0.3rem;
+                color: #ee581e;
+                font-weight: bold;
+            }
+
+            &__errorMsg{
+                color: #f2f2f2;
+                width: 400px;
+                text-align: center;
+            }
+            &__button{
+                background-color: #ee581e;
+                color: #f2f2f2;
+                padding: 0.8rem 2rem;
+                border-radius: 5px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                border: 2px solid #19191e;
+                margin-top: 0.5rem;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: #19191e;
+                    border: 2px solid #f2f2f2;
+                    color: #EE581E;
+                }
+            }
+
+            &__delete{
+                color: #f2f2f2;
+                margin-top: 2rem;
+                transition: 0.2s;
+                text-decoration: underline;
+                font-size: 0.9rem;
+                background-color: #19191e;
+                border: none;
+
+                &:hover{
+                    cursor: pointer;
+                    color: #ee581e;
+                }
+            }
+
+        }
+    }
+}
+
+.invisible{
+    display: none;
+}
+
+@media all and (max-width: 550px){
+
+    .profile{
+        
+        &__body{
+            margin-top: 92px;
+            width: 100%;
+            padding: 2rem 0;
+            height: auto;
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+
+            &__form{
+                width: auto;
+
+                &__input{
+                    width: auto;
+                }
+            }
+        }
+    }
+}

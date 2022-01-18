@@ -1,0 +1,33 @@
+.faq { 
+
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+    background-image: url("../../assets/images/bg-timer.png");
+    background-size: cover;
+    background-position: center;
+
+    &__body{
+
+        padding: 2rem;
+		flex-grow: 1;
+		overflow-y: auto;
+
+        &__title {
+            font-weight: bold;
+			font-size: 2rem;
+			text-align: center;
+        }
+    }
+  }
+
+  @media all and (max-width: 550px){
+
+
+	.faq__body{
+		margin-top: 92px;
+	}
+}

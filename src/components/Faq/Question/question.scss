@@ -1,0 +1,19 @@
+.question{
+
+    text-align: center;
+    line-height: 1.5rem;
+    background-color: white;
+    margin-top: 2rem;
+
+    &__question{
+        padding: 1rem;
+        background-color: black;
+        color: #EE581E;
+        font-size: 1.3rem;
+    }
+
+    &__answer{
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+}

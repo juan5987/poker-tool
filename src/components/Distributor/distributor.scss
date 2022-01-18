@@ -1,0 +1,304 @@
+.distributor{
+
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+    background-image: url("../../assets/images/bg-timer.png");
+    background-size: cover;
+    background-position: center;
+
+    &__body{
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #19191E;
+        width: min-content;
+        margin: 0.5rem auto;
+        padding: 2rem;
+        color: white;
+        flex-grow: 1;
+
+        &__container{
+
+            display: flex;
+        }
+        
+        &__title{
+
+            font-weight: bold;
+			font-size: 2rem;
+			text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        &__importChips{
+
+            background-color: #EE581E;
+            border: 2px solid #19191E;
+            color: #f2f2f2;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s ;
+            width: min-content;
+            white-space: nowrap;
+            margin: 0 auto;
+            margin-bottom: 1rem;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
+        }
+
+        &__form{
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+
+            &__chips{
+
+                background-color: #202020;
+                padding: 1rem;
+                border: 2px solid white;
+                overflow-y: scroll;
+                flex-grow: 1;
+                margin-bottom: 1rem;
+                width: 400px;
+                height: 300px;
+
+                &__text{
+                    text-align: center;
+                    font-size: 1.2rem;
+                    line-height: 1.5rem;
+                }
+            }
+
+            &__addChip{
+
+                background-color: #EE581E;
+                border: 2px solid #19191E;
+                color: #f2f2f2;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: 0.3s ;
+                width: min-content;
+                white-space: nowrap;
+                margin: 0 auto;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: #000000;
+                    border: 2px solid #f2f2f2;
+                    color: #EE581E;
+                }
+            }
+
+            &__tournamentInfos{
+
+                display: flex;
+                justify-content: space-around;
+                margin: 2rem 0;
+
+                &__element{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    &__label{
+                        margin-bottom: 0.3rem;
+                    }
+
+                    &__input{
+                        padding: 0.5rem 0;
+                        font-size: 1.3rem;
+                        font-weight: bold;
+                        text-align: center;
+                        width: 9rem
+                    }
+                }
+            }
+
+            &__calculate{
+
+                background-color: #ee581e;
+                color: #f2f2f2;
+                padding: 0.8rem 2rem;
+                border-radius: 5px;
+                font-weight: 700;
+                font-size: 1.1rem;
+                border: 2px solid #19191e;
+                margin: 0 auto;
+                margin-top: 0.5rem;
+                width: min-content;
+        
+                &:hover{
+                    cursor: pointer;
+                    background-color: #19191e;
+                    border: 2px solid #f2f2f2;
+                    color: #EE581E;
+                }
+            }
+        }
+
+        // RESULT
+
+        &__result{
+            
+            margin: auto;
+            width: 600px;
+
+            &__title{
+
+                font-weight: bold;
+                font-size: 2rem;
+                text-align: center;
+                color: white;
+                margin-bottom: 2rem;
+            }
+
+            &__text{
+
+                text-align: center;
+                font-size: 1.3rem;
+                color: #EE581E;
+                margin-bottom: 2rem;
+            }
+
+            &__chips{
+
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                &__errorTitle{
+                    color: #EE581E;
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                    border: 1px solid #EE581E;
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                }
+
+                &__error{
+                    text-align: center;
+                    line-height: 1.3rem;
+                }
+            }
+
+            &__button{
+
+                background-color: #EE581E;
+                border: 2px solid #19191E;
+                color: #f2f2f2;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: 0.3s ;
+                width: min-content;
+                white-space: nowrap;
+                margin: 2rem auto;
+                display: block;
+
+                &:hover{
+                    cursor: pointer;
+                    background-color: #000000;
+                    border: 2px solid #f2f2f2;
+                    color: #EE581E;
+                }
+            }
+        }
+    }
+}
+
+.invisible{
+    display: none;
+}
+
+@media all and (max-width: 630px){
+
+    .distributor__body__result{
+
+        width: 100vw;
+
+    }
+
+}
+
+@media all and (max-width: 930px){
+
+    .distributor__body{
+
+        &__form{
+
+            
+        }
+
+        &__container{
+
+            flex-direction: column;
+        }
+
+        &__result{
+
+            padding-left: 0;
+            border: none;
+            margin: 2rem auto;
+        }
+    }
+
+}
+
+
+@media all and (max-width: 550px){
+
+    .distributor{
+
+        height: auto;
+
+        &__body{
+
+            margin-top: 92px;
+            width: 100%;
+            padding: 2rem 0;
+            height: auto;
+            margin-bottom: 0;
+            border-bottom: 1px solid white;
+
+            &__form{
+
+                width: 100%;
+                height: auto;
+
+                &__chips{
+
+                    width: auto;
+                    border-right: none;
+                    border-left: none;
+                }
+
+                &__tournamentInfos{
+                    flex-direction: column;
+
+                    &__element{
+
+                        margin-bottom: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
