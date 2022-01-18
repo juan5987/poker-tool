@@ -113,7 +113,7 @@ const Header = ({
                         activeClassName="header__responsiveNavbar__element--selected"
                     >Répartiteur</NavLink>
                     <NavLink
-                        to="/profil"
+                        to="/profile"
                         className="header__responsiveNavbar__element"
                         activeClassName="header__responsiveNavbar__element--selected"
                         onMouseDown={!isLogged ? handleOpenUnauthorizedModal : undefined}

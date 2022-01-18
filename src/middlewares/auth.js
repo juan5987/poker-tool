@@ -141,6 +141,33 @@ const authMiddleware = (store) => (next) => (action) => {
     }
     break;
 
+    case "SUBMIT_PROFILE": {
+      const userId = localStorage.getItem('id');
+      const token = localStorage.getItem('token');
+      const state = store.getState();
+
+      axios({
+        method: 'patch',
+        url: `${api}/profile/${userId}`,
+        headers: { "Authorization": `Bearer ${token}` },
+        data: {
+          username: state.user.profile.username,
+          email: state.user.profile.email,
+          password: state.user.profile.password,
+          passwordConfirm: state.user.profile.passwordConfirm,
+        }
+      })
+      .then((response) => {
+        console.log(response);
+        store.dispatch({type: "SUBMIT__PROFILE__SUCCESS", message: response.data.message});
+      })
+      .catch((error) => {
+        console.error(error.response.data.message)
+        store.dispatch({type: "SUBMIT__PROFILE__FAILED", message: error.response.data.message});
+      });
+    }
+    break;
+    
     default:
       next(action);
       break;

@@ -35,6 +35,7 @@ const initialState = {
 		modifying: false,
 		username: "",
 		email: "",
+		emailConfirm: "",
 		password: "",
 		passwordConfirm: "",
 		showDeleteAccountModal: false,
@@ -251,6 +252,7 @@ const reducer = (state = initialState, action = {}) => {
 					...state.profile,
 					username: action.payload.username,
 					email: action.payload.email,
+					emailConfirm: action.payload.email,
 					password: ""
 				}
 			}
@@ -264,14 +266,25 @@ const reducer = (state = initialState, action = {}) => {
 				}
 			}
 
-		case "CHANGE_PROFIL_VALUE":
+		case "CHANGE_PROFILE_VALUE":
 			return {
 				...state,
 				profile: {
 					...state.profile,
-					[action.inputName]: action.newValue,
+					[action.inputName]: action.newInputValue,
 				}
 			}
+		
+		case "CANCEL_MODIFYING_PROFILE":
+		return {
+			...state,
+			profile: {
+				...state.profile,
+				modifying: false,
+				password: "",
+				passwordConfirm: "",
+			}
+		}
 
 		default:
 			return state;

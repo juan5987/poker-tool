@@ -15,6 +15,7 @@ const Profile = ({
     modifying,
     usernameValue,
     emailValue,
+    emailConfirmValue,
     passwordValue,
     passwordConfirmValue,
     showDeleteAccountModal,
@@ -24,7 +25,8 @@ const Profile = ({
     handleSubmitProfile,
     errorMessage,
     handlePasswordVisibilityToggle,
-    passwordVisibility
+    passwordVisibility,
+    handleCancelModifying,
 }) => {
 
     const dispatch = useDispatch();
@@ -37,13 +39,24 @@ const Profile = ({
             <Header />
             <main className="profile__body">
                 <form className="profile__body__form" onSubmit={handleSubmitProfile} >
+                    {modifying
+                    ?
+                    <h2 className="profile__body__form__subtitle">Modification du profil</h2>
+                    :
                     <h2 className="profile__body__form__subtitle">Mon profil</h2>
+                    }
 
                     <label htmlFor="username" className="profile__body__form__label">Pseudo</label>
                     <input onChange={handleChangeProfileValue} type="text" name="username" className="profile__body__form__input" value={usernameValue} disabled={modifying ? "" : "disabled"} required />
 
                     <label htmlFor="email" className="profile__body__form__label">Email</label>
                     <input onChange={handleChangeProfileValue} type="email" name="email" className="profile__body__form__input" value={emailValue} disabled={modifying ? "" : "disabled"} required />
+                    {modifying &&
+                    <>
+                        <label htmlFor="emailConfirm" className="profile__body__form__label">Confirmation de l'email</label>
+                        <input onChange={handleChangeProfileValue} type="email" name="emailConfirm" className="profile__body__form__input" value={emailConfirmValue} disabled={modifying ? "" : "disabled"} required />
+                    </>
+                    }
 
                     <label htmlFor="password" className="profile__body__form__label">Mot de passe</label>
                     {passwordVisibility
@@ -97,8 +110,11 @@ const Profile = ({
                     }
 
                     {errorMessage && <p className="profile__body__form__errorMsg">{errorMessage}</p>}
-                    <button type="submit" className={modifying ? "profile__body__form__button" : "profile__body__form__button invisible"}>Valider</button>
-                    <button onClick={handleModifyProfile} className={!modifying ? "profile__body__form__button" : "profile__body__form__button invisible"}>Modifier mon profil</button>
+                    <div className="profile__body__form__buttons">
+                        <button type="submit" className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Valider</button>
+                        <button onClick={handleCancelModifying} className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Annuler</button>
+                    </div>
+                    <button onClick={handleModifyProfile} className={!modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Modifier mon profil</button>
                     <button
                         className="profile__body__form__delete"
                         onClick={handleShowModal}
@@ -146,6 +162,7 @@ const mapStateToProps = (state) => ({
     modifying: state.user.profile.modifying,
     usernameValue: state.user.profile.username,
     emailValue: state.user.profile.email,
+    emailConfirmValue: state.user.profile.emailConfirm,
     passwordValue: state.user.profile.password,
     passwordConfirmValue: state.user.profile.passwordConfirm,
     showDeleteAccountModal: state.user.profile.showDeleteAccountModal,
@@ -159,7 +176,7 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch({ type: "MODIFY_PROFIL" });
     },
     handleChangeProfileValue: (event) => {
-        dispatch({ type: "CHANGE_PROFIL_VALUE", newInputValue: event.target.value, inputName: event.target.name })
+        dispatch({ type: "CHANGE_PROFILE_VALUE", newInputValue: event.target.value, inputName: event.target.name });
     },
     handleShowModal: (event) => {
         event.preventDefault();
@@ -177,7 +194,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handlePasswordVisibilityToggle: () => {
 		dispatch({type: "TOGGLE_PASSWORD_VISIBILITY"});
-	}
+	},
+    handleCancelModifying: () => {
+        dispatch({type: "CANCEL_MODIFYING_PROFILE"});
+        dispatch({type: "GET_PROFILE_FROM_API"});
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

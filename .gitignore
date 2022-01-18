@@ -1,0 +1,8 @@
+/node_modules
+/build
+.htaccess
+./jsconfig.js
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
