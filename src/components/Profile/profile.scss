@@ -36,8 +36,8 @@
 
             &__input{
                 width: 400px;
-                padding: 0.8rem  1rem;
-                margin-bottom: 1.5rem;
+                padding: 0.6rem  1rem;
+                margin-bottom: 1.2rem;
                 font-size: 1.3rem;
                 font-weight: bold;
 
@@ -60,7 +60,7 @@
             &__inputInfos{
                 font-size: 0.7em;
                 position: relative;
-                bottom: 20px;
+                bottom: 15px;
                 right: 15px;
 
                 &__passwordVisibilityToggler{
@@ -74,7 +74,7 @@
                         line-height: 100%;
                         position: absolute;
                         right: 10px;
-                        bottom: 53px;
+                        bottom: 43px;
             
                         &:hover{
                             cursor: pointer;
@@ -93,10 +93,21 @@
             }
 
             &__errorMsg{
-                color: #f2f2f2;
-                width: 400px;
+                color: red;
                 text-align: center;
+                margin-top: 1rem;     
+                border: 1px solid red;
+                padding: 1rem;
             }
+
+            &__successMsg{
+                color: green;
+                text-align: center;
+                margin-top: 1rem;     
+                border: 1px solid green;
+                padding: 1rem;
+            }
+
             &__buttons{
                 width: 100%;
                 display: flex;
@@ -123,7 +134,7 @@
 
             &__delete{
                 color: #f2f2f2;
-                margin-top: 2rem;
+                margin-top: 1rem;
                 transition: 0.2s;
                 text-decoration: underline;
                 font-size: 0.9rem;
@@ -136,6 +147,42 @@
                 }
             }
 
+        }
+    }
+}
+
+.delete{
+
+    &__confirm{
+        text-align: center;
+        line-height: 1.2rem;
+
+        &--alert{
+            color: red;
+        }
+    }
+    
+    &__buttons{
+        display: flex;
+        justify-content: space-around;
+
+        &__button{
+            background-color: #ee581e;
+            color: #f2f2f2;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid #19191e;
+            margin-top: 0.5rem;
+            margin-top: 1rem;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #19191e;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
         }
     }
 }
@@ -164,15 +211,15 @@
                 }
 
                 &__inputInfos{
-                    left: 0px;
+                    left: 15px;
     
                     &__passwordVisibilityToggler{
                 
                         &__icon{
                             line-height: 100%;
                             position: absolute;
-                            right: 10px;
-                            bottom: 64px;
+                            right: 25px;
+                            bottom: 53px;
                 
                             &:hover{
                                 cursor: pointer;

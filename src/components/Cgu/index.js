@@ -35,7 +35,7 @@ const Cgu = () => (
 
 			<h2 className="cgu__body__articleTitle">ARTICLE 2 : Mentions légales</h2>
 			<p className="cgu__body__articleContent">
-				L'édition du site Poker Tool est assurée par la promotion "Robin" pour projet de fin d'études.
+				L'édition du site Poker Tool est assurée par Juan MACHADO.
 			</p>
 
 			<h2 className="cgu__body__articleTitle">ARTICLE 3 : Définitions</h2>

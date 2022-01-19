@@ -19,11 +19,12 @@ const Profile = ({
     passwordValue,
     passwordConfirmValue,
     showDeleteAccountModal,
-    handleShowModal,
+    handleShowDeleteAccountModal,
     handleCloseModal,
-    submitDeleteAccount,
+    handleDeleteAccount,
     handleSubmitProfile,
     errorMessage,
+    successMessage,
     handlePasswordVisibilityToggle,
     passwordVisibility,
     handleCancelModifying,
@@ -109,7 +110,6 @@ const Profile = ({
                     </>
                     }
 
-                    {errorMessage && <p className="profile__body__form__errorMsg">{errorMessage}</p>}
                     <div className="profile__body__form__buttons">
                         <button type="submit" className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Valider</button>
                         <button onClick={handleCancelModifying} className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Annuler</button>
@@ -117,32 +117,42 @@ const Profile = ({
                     <button onClick={handleModifyProfile} className={!modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Modifier mon profil</button>
                     <button
                         className="profile__body__form__delete"
-                        onClick={handleShowModal}
+                        onClick={handleShowDeleteAccountModal}
                     >
                         Supprimer mon compte
                     </button>
+                    {errorMessage && <p className="profile__body__form__errorMsg">{errorMessage}</p>}
+                    {successMessage && <p className="profile__body__form__successMsg">{successMessage}</p>}
                 </form>
                 <Modal
                     isOpen={showDeleteAccountModal}
                     title='Supprimer mon compte'
                     content={(
-                        <div>
-                            <p>Voulez-vous vraiment supprimer votre compte ?</p>
-                            <Link to='/'>
+                        <div className="delete">
+                            <p className="delete__confirm">
+                                Voulez-vous vraiment supprimer votre compte ?
+                            </p>
+                            <br />
+                            <p className="delete__confirm delete__confirm--alert">
+                                Vos données seront définitivement supprimées.
+                            </p>
+                            <div className="delete__buttons">
+                                <Link to='/'>
+                                    <button
+                                        type="submit"
+                                        className="delete__buttons__button"
+                                        onClick={handleDeleteAccount}
+                                    >
+                                        OK
+                                    </button>
+                                </Link>
                                 <button
-                                    type="submit"
-                                    className="connexionForm__submit"
-                                    onClick={submitDeleteAccount}
+                                    className="delete__buttons__button"
+                                    onClick={handleCloseModal}
                                 >
-                                    OK
+                                    Annuler
                                 </button>
-                            </Link>
-                            <button
-                                className="connexionForm__submit"
-                                onClick={handleCloseModal}
-                            >
-                                Annuler
-                            </button>
+                            </div>
                         </div>
                     )}
                 />
@@ -167,25 +177,26 @@ const mapStateToProps = (state) => ({
     passwordConfirmValue: state.user.profile.passwordConfirm,
     showDeleteAccountModal: state.user.profile.showDeleteAccountModal,
     errorMessage: state.user.profile.errorMessage,
+    successMessage: state.user.profile.successMessage,
     passwordVisibility: state.user.registration.passwordVisibility,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     handleModifyProfile: (event) => {
         event.preventDefault();
-        dispatch({ type: "MODIFY_PROFIL" });
+        dispatch({ type: "MODIFY_PROFILE" });
     },
     handleChangeProfileValue: (event) => {
         dispatch({ type: "CHANGE_PROFILE_VALUE", newInputValue: event.target.value, inputName: event.target.name });
     },
-    handleShowModal: (event) => {
+    handleShowDeleteAccountModal: (event) => {
         event.preventDefault();
         dispatch({ type: "SHOW_DELETE_ACCOUNT_MODAL" });
     },
     handleCloseModal: () => {
-        dispatch({ type: "CLOSE_MODAL" });
+        dispatch({ type: "CLOSE_MODALS" });
     },
-    submitDeleteAccount: () => {
+    handleDeleteAccount: () => {
         dispatch({ type: "DELETE_USER_ACCOUNT" });
     },
     handleSubmitProfile: (event) => {
@@ -195,7 +206,8 @@ const mapDispatchToProps = (dispatch) => ({
     handlePasswordVisibilityToggle: () => {
 		dispatch({type: "TOGGLE_PASSWORD_VISIBILITY"});
 	},
-    handleCancelModifying: () => {
+    handleCancelModifying: (event) => {
+        event.preventDefault();
         dispatch({type: "CANCEL_MODIFYING_PROFILE"});
         dispatch({type: "GET_PROFILE_FROM_API"});
     }

@@ -26,6 +26,7 @@ const authMiddleware = (store) => (next) => (action) => {
           store.dispatch({type: "CLOSE_MODALS"});
         })
         .catch((error) => {     
+          console.log(error.response);
           store.dispatch({type:"LOG_IN_FAILED", message: error.response.data.message});
         });
       break;
@@ -138,8 +139,9 @@ const authMiddleware = (store) => (next) => (action) => {
         console.log(error);
         store.dispatch({type:"GET_PROFIL_FROM_API_ERROR", message: error.response.data.message});
       })
+      break;
     }
-    break;
+    
 
     case "SUBMIT_PROFILE": {
       const userId = localStorage.getItem('id');
@@ -153,6 +155,7 @@ const authMiddleware = (store) => (next) => (action) => {
         data: {
           username: state.user.profile.username,
           email: state.user.profile.email,
+          emailConfirm: state.user.profile.emailConfirm,
           password: state.user.profile.password,
           passwordConfirm: state.user.profile.passwordConfirm,
         }
@@ -165,8 +168,30 @@ const authMiddleware = (store) => (next) => (action) => {
         console.error(error.response.data.message)
         store.dispatch({type: "SUBMIT__PROFILE__FAILED", message: error.response.data.message});
       });
+      break;
     }
-    break;
+    
+    case "DELETE_USER_ACCOUNT": {
+
+      const userId = localStorage.getItem('id');
+      const token = localStorage.getItem('token');
+
+      axios({
+        method: 'delete',
+        url: `${api}/profile/${userId}`,
+        headers: { "Authorization": `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response);
+        store.dispatch({type: "DELETE__USER__ACCOUNT__SUCCESS"});
+        store.dispatch({type:"LOG_OUT"});
+      })
+      .catch((error) => {
+        console.error(error.response.data.message)
+        store.dispatch({type: "DELETE__USER__ACCOUNT__FAILED", message: error.response.data.message});
+      });
+      break;
+    }
     
     default:
       next(action);

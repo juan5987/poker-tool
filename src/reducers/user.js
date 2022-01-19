@@ -71,6 +71,10 @@ const reducer = (state = initialState, action = {}) => {
 					passwordConfirm: '',
 					errorMessage: '',
 					passwordVisibility: false,
+				},
+				profile: {
+					...state.profile,
+					showDeleteAccountModal: false,
 				}
 			}
 
@@ -253,11 +257,13 @@ const reducer = (state = initialState, action = {}) => {
 					username: action.payload.username,
 					email: action.payload.email,
 					emailConfirm: action.payload.email,
-					password: ""
+					password: "",
+					errorMessage: "",
+					successMessage: "",
 				}
 			}
 
-		case "MODIFY_PROFIL":
+		case "MODIFY_PROFILE":
 			return {
 				...state,
 				profile: {
@@ -276,15 +282,50 @@ const reducer = (state = initialState, action = {}) => {
 			}
 		
 		case "CANCEL_MODIFYING_PROFILE":
-		return {
-			...state,
-			profile: {
-				...state.profile,
-				modifying: false,
-				password: "",
-				passwordConfirm: "",
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					modifying: false,
+					password: "",
+					passwordConfirm: "",
+				}
 			}
-		}
+
+		case "SUBMIT__PROFILE__SUCCESS":
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					successMessage: action.message,
+					errorMessage: "",
+					modifying: false,
+				}
+			}
+
+		case "SUBMIT__PROFILE__FAILED":
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					errorMessage: action.message,
+					successMessage: "",
+				}
+			}
+
+		case "SHOW_DELETE_ACCOUNT_MODAL":
+			return {
+				...state,
+				profile: {
+					...state.profile,
+					showDeleteAccountModal: true,
+				}
+			}
+		
+			case "DELETE__USER__ACCOUNT__SUCCESS":
+				return {
+					...initialState,
+				}
 
 		default:
 			return state;
