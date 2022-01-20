@@ -134,23 +134,14 @@ const Cgu = () => (
 				du fait imprévisible et insurmontable d'un tiers.
 			</p>
 
-			<h2 className="cgu__body__articleTitle">ARTICLE 8 : Liens hypertextes</h2>
-			<p className="cgu__body__articleContent">
-				De nombreux liens hypertextes sortants sont présents sur le site,
-				cependant les pages web où mènent ces liens n'engagent en rien la
-				responsabilité de Poker Tool qui n'a pas le contrôle de ces liens.
-				L'Utilisateur s'interdit donc à engager la responsabilité du site concernant
-				le contenu et les ressources relatives à ces liens hypertextes sortants.
-			</p>
-
-			<h2 className="cgu__body__articleTitle">ARTICLE 9 : Évolution du contrat</h2>
+			<h2 className="cgu__body__articleTitle">ARTICLE 8 : Évolution du contrat</h2>
 			<p className="cgu__body__articleContent">
 				Le site se réserve à tout moment le droit de modifier les clauses stipulées
 				dans le présent contrat.
 			</p>
 
 
-			<h2 className="cgu__body__articleTitle">ARTICLE 10 : Durée</h2>
+			<h2 className="cgu__body__articleTitle">ARTICLE 9 : Durée</h2>
 			<p className="cgu__body__articleContent">
 				La durée du présent contrat est indéterminée. Le contrat produit ses
 				effets à l'égard de l'Utilisateur à compter de l'utilisation du service.

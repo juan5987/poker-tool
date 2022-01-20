@@ -14,6 +14,7 @@ import ConfirmationCheck from 'components/Confirmation/ConfirmationCheck';
 import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import ResetPassword from 'components/ResetPassword';
 import Profile from 'components/Profile';
+import Tournaments from 'components/Tournaments';
 
 //style
 import './App.scss';
@@ -52,6 +53,9 @@ const App = () => {
         </Route>
         <Route exact path="/profile">
           <Profile />
+        </Route>
+        <Route exact path="/tournaments">
+          <Tournaments />
         </Route>
         <Route exact path="/confirmation/:confirmationCode">
           <ConfirmationCheck />

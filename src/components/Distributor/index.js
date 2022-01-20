@@ -34,7 +34,6 @@ const Distributor = ({
             <Header />
 
             <main className="distributor__body">
-                <div className="distributor__body__container">
                     <form className={!isResult ? "distributor__body__form" : "distributor__body__form invisible" } onSubmit={handleCalculateDistribution}>            
                         <h2 className="distributor__body__title">Répartiteur de jetons</h2>
                         <button onClick={handleImportChips} type="button" className="distributor__body__importChips">Importer mes jetons</button>
@@ -94,7 +93,6 @@ const Distributor = ({
                             <button onClick={handleResetDistributor} className="distributor__body__result__button">Retourner au formulaire</button>
                     </div>
                     }
-                </div>
             </main>
             <Footer />
         </div>
