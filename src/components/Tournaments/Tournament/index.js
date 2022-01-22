@@ -1,7 +1,9 @@
 import { connect } from "react-redux"
 import { Edit, Eye, Trash2 } from 'react-feather';
-import "./tournament.scss";
 import { useState } from "react";
+import dateFormat, { masks } from "dateformat";
+import { shortName } from '../../../utils/shortenString';
+import "./tournament.scss";
 
 const Tournament = ({
     tournament,
@@ -11,16 +13,18 @@ const Tournament = ({
     const [showDetailsButtonInfo, setShowDetailsButtonInfo] = useState(false);
     const [showDeleteButtonInfo, setShowDeleteButtonInfo] = useState(false);
 
+    // const formattedDate = dateFormat(tournament.date, 'dd/mm/yyyy');
+
     return (
         <div className="tournament">
-            <h3 className="tournament__name">{tournament.name}</h3>
+            <h3 className="tournament__name">{shortName(tournament.name)}</h3>
             <div className="tournament__element">
                 <p className="tournament__element__name">Date : </p>
                 <p className="tournament__element__value">{tournament.date}</p>
             </div>
             <div className="tournament__element">
                 <p className="tournament__element__name">Lieux : </p>
-                <p className="tournament__element__value">{tournament.location}</p>
+                <p className="tournament__element__value">{shortName(tournament.location)}</p>
             </div>
             <div className="tournament__element">
                 <p className="tournament__element__name">Status : </p>

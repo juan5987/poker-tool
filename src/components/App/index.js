@@ -15,6 +15,7 @@ import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import ResetPassword from 'components/ResetPassword';
 import Profile from 'components/Profile';
 import Tournaments from 'components/Tournaments';
+import CreateTournament from 'components/Tournaments/createTournament';
 
 //style
 import './App.scss';
@@ -57,6 +58,9 @@ const App = () => {
         <Route exact path="/tournaments">
           <Tournaments />
         </Route>
+        <Route exact path="/tournaments/create">
+          <CreateTournament />
+        </Route>
         <Route exact path="/confirmation/:confirmationCode">
           <ConfirmationCheck />
         </Route>
@@ -71,4 +75,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default  App;

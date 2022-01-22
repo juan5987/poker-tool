@@ -1,70 +1,81 @@
 const initialState = {
-  tournaments: [
-    {
-      id: 1,
-      name: "Premier Poker de 2022",
-      date: "22/01/2022",
-      location: "Chez Juan",
-      nbPlayer: 5,
-      speed: 20,
-      startingStack: 10000,
-      buyIn: 10,
-      status: "prévu",
-      small_blind: 100,
-      chips_user: true,
-      comment: "Ca va être fun !"
-    },
-    {
-      id: 2,
-      name: "Deuxième Poker de 2022",
-      date: "22/02/2022",
-      location: "Chez Wills",
-      nbPlayer: 5,
-      speed: 20,
-      startingStack: 10000,
-      buyIn: 10,
-      status: "prévu",
-      small_blind: 100,
-      chips_user: true,
-      comment: "Ca va être super fun !"
-    },
-    {
-      id: 3,
-      name: "Tournoi d'anniversaire",
-      date: "07/03/2022",
-      location: "Chez Vince",
-      nbPlayer: 5,
-      speed: 20,
-      startingStack: 10000,
-      buyIn: 10,
-      status: "prévu",
-      small_blind: 100,
-      chips_user: true,
-      comment: "Ca va être méga fun !"
-    },
-    {
-      id: 1,
-      name: "Tournoi d'Haloween",
-      date: "30/10/2022",
-      location: "Chez Juan",
-      nbPlayer: 5,
-      speed: 20,
-      startingStack: 10000,
-      buyIn: 10,
-      status: "prévu",
-      small_blind: 100,
-      chips_user: true,
-      comment: "Ca va être fun !"
-    },
-  ],
+  tournaments: [],
+  createTournament: {
+    name: "",
+    date: "",
+    location: "",
+    nbPlayer: 2,
+    speed: 1,
+    startingStack: 1,
+    buyIn: 1,
+    small_blind: 1,
+    chips_user: false,
+    comment: "",
+  },
   structure: {
 
   },
+  errorMessage: "",
+  redirectToTournamentPage: false,
 }
 
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case "GET_TOURNAMENTS_FROM_API_SUCCESS":
+      return {
+        ...state,
+        tournaments: action.tournaments,
+      }
+
+    case "SHOW_CREATE_TOURNAMENT_MODAL":
+      return {
+        ...state,
+        showCreateTournamentModal: true,
+      }
+    case "CREATE_TOURNAMENT":
+      return {
+        ...state,
+        createTournament: action.tournament,
+      }
+    case "CHANGE_CREATE_TOURNAMENT_INPUTS":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          [action.inputName]: action.newValue,
+        }
+      }
+    case "CLOSE_MODALS":
+      return {
+        ...state,
+        showCreateTournamentModal: false,
+      }
+
+    case "SUBMIT_CREATE_TOURNAMENT_FORM_SUCCESS":
+      return {
+        ...state,
+        createTournament: {
+          name: "",
+          date: "",
+          location: "",
+          nbPlayer: 2,
+          speed: 1,
+          startingStack: 1,
+          buyIn: 1,
+          small_blind: 1,
+          chips_user: false,
+          comment: "",
+        },
+        errorMessage: "",
+        redirect: true,
+      }
+
+    case "SUBMIT_CREATE_TOURNAMENT_FORM_FAILED":
+      return {
+        ...state,
+        errorMessage: action.message,
+      }
 
     default:
       return state;

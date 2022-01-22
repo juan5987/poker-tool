@@ -151,7 +151,9 @@ const authMiddleware = (store) => (next) => (action) => {
       axios({
         method: 'patch',
         url: `${api}/profile/${userId}`,
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: { 
+          "Authorization": `Bearer ${token}`,
+       },
         data: {
           username: state.user.profile.username,
           email: state.user.profile.email,
@@ -165,7 +167,7 @@ const authMiddleware = (store) => (next) => (action) => {
         store.dispatch({type: "SUBMIT__PROFILE__SUCCESS", message: response.data.message});
       })
       .catch((error) => {
-        console.error(error.response.data.message)
+        console.error(error);
         store.dispatch({type: "SUBMIT__PROFILE__FAILED", message: error.response.data.message});
       });
       break;

@@ -39,7 +39,7 @@ const Profile = ({
         <div className="profile">
             <Header />
             <main className="profile__body">
-                <form className="profile__body__form" onSubmit={handleSubmitProfile} >
+                <form className="profile__body__form">
                     {modifying
                     ?
                     <h2 className="profile__body__form__subtitle">Modification du profil</h2>
@@ -111,7 +111,7 @@ const Profile = ({
                     }
 
                     <div className="profile__body__form__buttons">
-                        <button type="submit" className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Valider</button>
+                        <button type="submit" onClick={handleSubmitProfile} className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Valider</button>
                         <button onClick={handleCancelModifying} className={modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Annuler</button>
                     </div>
                     <button onClick={handleModifyProfile} className={!modifying ? "profile__body__form__buttons__button" : "profile__body__form__buttons__button invisible"}>Modifier mon profil</button>

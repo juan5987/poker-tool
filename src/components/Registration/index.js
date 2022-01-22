@@ -28,7 +28,7 @@ const Registration = ({
 					className="registrationModal"
 					content={(
 						<form onSubmit={handleRegister} className="inscriptionForm">
-								<label htmlFor="email" className="inscriptionForm__label">Pseudo</label>
+								<label htmlFor="username" className="inscriptionForm__label">Pseudo</label>
 								<input onChange={ handleChangeRegistrationInputs } type="text" name="username" value={username} autoComplete="username" className="inscriptionForm__input" required/>
 
 								<label htmlFor="email" className="inscriptionForm__label">Email</label>
