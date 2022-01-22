@@ -1,5 +1,7 @@
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import "./createTournament.scss";
@@ -16,9 +18,20 @@ const CreateTournament = ({
     chips_user,
     comment,
     errorMessage,
+    redirectToTournamentsPage,
     handleChangeCreateTournamentInputs,
     handleSubmitCreateTournamentForm,
 }) => {
+
+    const history = useHistory();
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        if(redirectToTournamentsPage){
+            history.push("/tournaments");
+            dispatch({type: "CANCEL_REDIRECT"});
+        }
+    })
 
     return (
         <div className="createTournament">
@@ -99,6 +112,7 @@ const mapStateToProps = (state) => ({
     chips_user: state.tournament.createTournament.chips_user,
     comment: state.tournament.createTournament.comment,
     errorMessage: state.tournament.errorMessage,
+    redirectToTournamentsPage: state.tournament.redirectToTournamentsPage,
 });
 
 const mapDispatchToProps = (dispatch) => ({

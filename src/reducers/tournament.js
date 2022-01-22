@@ -16,7 +16,7 @@ const initialState = {
 
   },
   errorMessage: "",
-  redirectToTournamentPage: false,
+  redirectToTournamentsPage: false,
 }
 
 
@@ -68,13 +68,19 @@ const reducer = (state = initialState, action = {}) => {
           comment: "",
         },
         errorMessage: "",
-        redirect: true,
+        redirectToTournamentsPage: true,
       }
 
     case "SUBMIT_CREATE_TOURNAMENT_FORM_FAILED":
       return {
         ...state,
         errorMessage: action.message,
+      }
+
+    case "CANCEL_REDIRECT":
+      return {
+        ...state,
+        redirectToTournamentsPage: false,
       }
 
     default:

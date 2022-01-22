@@ -31,7 +31,6 @@ const distributorMiddleware = (store) => (next) => (action) => {
                 headers: { "Authorization": `Bearer ${token}` },
             })
                 .then((response) => {
-                    console.log(response.data.chips)
                     store.dispatch({ type: "GET_TOURNAMENTS_FROM_API_SUCCESS", tournaments: response.data.tournaments });
                 })
                 .catch(error => console.log(error));

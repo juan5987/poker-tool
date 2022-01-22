@@ -1,34 +1,41 @@
 import { connect } from "react-redux"
 import { Edit, Eye, Trash2 } from 'react-feather';
 import { useState } from "react";
-import dateFormat, { masks } from "dateformat";
+import { Link } from "react-router-dom";
+import dateFormat from "dateformat";
 import { shortName } from '../../../utils/shortenString';
 import "./tournament.scss";
 
 const Tournament = ({
     tournament,
+    handleDeleteTournament,
 }) => {
 
     const [showModifyButtonInfo, setShowModifyButtonInfo] = useState(false);
     const [showDetailsButtonInfo, setShowDetailsButtonInfo] = useState(false);
     const [showDeleteButtonInfo, setShowDeleteButtonInfo] = useState(false);
 
-    // const formattedDate = dateFormat(tournament.date, 'dd/mm/yyyy');
+    const formattedDate = dateFormat(tournament.date, 'dd/mm/yyyy');
 
     return (
         <div className="tournament">
-            <h3 className="tournament__name">{shortName(tournament.name)}</h3>
-            <div className="tournament__element">
-                <p className="tournament__element__name">Date : </p>
-                <p className="tournament__element__value">{tournament.date}</p>
+            <div className="tournament__elements">
+            <div className="tournament__elements__element">
+                <p className="tournament__elements__element__name">Nom :</p>
+                <p className="tournament__elements__element__value">{shortName(tournament.name)}</p>
             </div>
-            <div className="tournament__element">
-                <p className="tournament__element__name">Lieux : </p>
-                <p className="tournament__element__value">{shortName(tournament.location)}</p>
+            <div className="tournament__elements__element">
+                <p className="tournament__elements__element__name">Date : </p>
+                <p className="tournament__elements__element__value">{formattedDate}</p>
             </div>
-            <div className="tournament__element">
-                <p className="tournament__element__name">Status : </p>
-                <p className="tournament__element__value">{tournament.status}</p>
+            <div className="tournament__elements__element">
+                <p className="tournament__elements__element__name">Lieux : </p>
+                <p className="tournament__elements__element__value">{shortName(tournament.location)}</p>
+            </div>
+            <div className="tournament__elements__element">
+                <p className="tournament__elements__element__name">Status : </p>
+                <p className="tournament__elements__element__value">{tournament.status}</p>
+            </div>
             </div>
             <div className="tournament__buttons">
                 <button onMouseOver={() => setShowModifyButtonInfo(true) } onMouseLeave={() => setShowModifyButtonInfo(false) } className="tournament__buttons__button"><Edit /></button>
@@ -42,17 +49,15 @@ const Tournament = ({
                     <span className="tournament__buttons__bubble">Voir les détails du tournoi</span>
 
                 }
-                <button onMouseOver={() => setShowDeleteButtonInfo(true) } onMouseLeave={() => setShowDeleteButtonInfo(false) }className="tournament__buttons__button"><Trash2 /></button>
+                <button onMouseOver={() => setShowDeleteButtonInfo(true) } onMouseLeave={() => setShowDeleteButtonInfo(false) } onClick={handleDeleteTournament} className="tournament__buttons__button" data-tournamentid={tournament.id}><Trash2 data-tournamentid={tournament.id}/></button>
                 {
                     showDeleteButtonInfo &&
                     <span className="tournament__buttons__bubble">Supprimer le tournoi</span>
 
                 }
+                <button className="tournament__buttons__launch">Lancer le tournoi</button>
             </div>
-            <div className="tournament__launch">
-                <button className="tournament__launch__button">Lancer le tournoi</button>
-            </div>
-        </div>
+        </div >
     )
 }
 
@@ -61,6 +66,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    handleDeleteTournament: (event) => {
+        const tournamentId = event.target.dataset.tournamentid;
+        dispatch({type: "DELETE_TOURNAMENT", tournamentId: tournamentId});
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tournament);

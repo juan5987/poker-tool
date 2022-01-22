@@ -22,8 +22,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
         .then(response => {
           localStorage.setItem('id', response.data.id);
           localStorage.setItem('token', response.data.token);
-          store.dispatch({ type: "LOG_IN_SUCCESS" });
-          store.dispatch({ type: "CLOSE_MODALS" });
+          store.dispatch({type: "GET_TOURNAMENTS_FROM_API_SUCCESS"});
         })
         .catch((error) => {
           console.log(error.response);
@@ -62,6 +61,31 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           console.error(error.response.data.message);
           store.dispatch({ type: "SUBMIT_CREATE_TOURNAMENT_FORM_FAILED", message: error.response.data.message });
         });
+      break;
+    }
+
+    case "DELETE_TOURNAMENT": {
+      
+      const token = localStorage.getItem('token');
+      const tournamentId = action.tournamentId;
+      console.log(tournamentId);
+
+      axios({
+        method: 'delete',
+        url: `${api}/tournament/${tournamentId}`,
+        headers: { "Authorization": `Bearer ${token}` },
+        data: {
+          tournamentId: action.tournamentId,
+        }
+      })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
       break;
     }
     default:

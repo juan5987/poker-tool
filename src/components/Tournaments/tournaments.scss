@@ -14,7 +14,6 @@
         flex-direction: column;
         align-items: center;
         background-color: #19191E;
-        width: min-content;
         margin: 0.5rem auto;
         color: white;
         flex-grow: 1;
@@ -52,15 +51,16 @@
 
         &__container{
             display: flex;
-            justify-content: flex-start;
-            width: 1100px;
-            overflow-x: auto;
+            flex-direction: column;
+            width: 100%;
+            overflow-y: auto;
+            height: 520px;
 
             &__noTournament{
-                overflow-y: hidden;
+                width: 100%;
+                text-align: left;
                 color: #EE581E;
                 font-size: 1.1rem;
-                margin-left: 1rem;
             }
         }
 
@@ -75,30 +75,27 @@
     }
 }
 
-@media all and (max-width:1164px){
+@media all and (max-width: 1000px){
     .tournaments{
-        background: #b8b8b8;
-        height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
 
         &__body{
             box-sizing: border-box;
-            padding: 1rem;
             width: 100%;
-
-            &__container{
-                justify-content: center;
-                flex-direction: column;
-                width: auto;
-            }
+            padding: 1rem;
         }
     }
 }
 
-@media all and (max-width:550px){
-    .tournaments{
+@media all and (max-width: 550px){
 
-        &__body{
-            margin-top: 100px;
+    .tournaments__body{
+        margin-top: 100px;
+
+        &__container{
+            height: auto;
         }
     }
+
 }
