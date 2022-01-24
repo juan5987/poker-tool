@@ -50,6 +50,11 @@
                 background-color: #EE581E;
                 color: white;
             }
+
+            &__svg{
+                position: relative;
+                top: 3px;
+            }
         }
 
         &__bubble{
@@ -115,7 +120,6 @@
 
             &__button{
                 margin-bottom: 1rem;
-                z-index: 150;
             }
 
             &__bubble{

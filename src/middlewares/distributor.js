@@ -21,23 +21,6 @@ const distributorMiddleware = (store) => (next) => (action) => {
             break;
         }
 
-        case "GET_TOURNAMENTS_FROM_API": {
-            const userId = localStorage.getItem('id');
-            const token = localStorage.getItem('token');
-
-            axios({
-                method: 'get',
-                url: `${api}/tournaments/${userId}`,
-                headers: { "Authorization": `Bearer ${token}` },
-            })
-                .then((response) => {
-                    store.dispatch({ type: "GET_TOURNAMENTS_FROM_API_SUCCESS", tournaments: response.data.tournaments });
-                })
-                .catch(error => console.log(error));
-            break;
-        }
-
-
         default:
             next(action);
             break;

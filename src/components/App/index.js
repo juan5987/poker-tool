@@ -15,10 +15,13 @@ import ForgotPasswordForm from 'components/ForgotPasswordForm';
 import ResetPassword from 'components/ResetPassword';
 import Profile from 'components/Profile';
 import Tournaments from 'components/Tournaments';
-import CreateTournament from 'components/Tournaments/createTournament';
+import CreateTournament from 'components/Tournaments/CreateTournament';
+import TournamentDetails from 'components/Tournaments/TournamentDetails';
+import ModifyTournament from 'components/Tournaments/ModifyTournament';
 
 //style
 import './App.scss';
+
 
 const App = () => {
 
@@ -60,6 +63,12 @@ const App = () => {
         </Route>
         <Route exact path="/tournaments/create">
           <CreateTournament />
+        </Route>
+        <Route exact path="/tournament/:id">
+          <TournamentDetails />
+        </Route>
+        <Route exact path="/tournament/modify/:id">
+          <ModifyTournament />
         </Route>
         <Route exact path="/confirmation/:confirmationCode">
           <ConfirmationCheck />

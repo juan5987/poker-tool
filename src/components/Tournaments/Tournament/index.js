@@ -38,18 +38,33 @@ const Tournament = ({
             </div>
             </div>
             <div className="tournament__buttons">
-                <button onMouseOver={() => setShowModifyButtonInfo(true) } onMouseLeave={() => setShowModifyButtonInfo(false) } className="tournament__buttons__button"><Edit /></button>
+                <Link 
+                to={`/tournament/modify/${tournament.id}`}
+                onMouseOver={() => setShowModifyButtonInfo(true) } 
+                onMouseLeave={() => setShowModifyButtonInfo(false) } className="tournament__buttons__button" data-tournamentid={tournament.id}>
+                    <Edit className="tournament__buttons__button__svg" data-tournamentid={tournament.id}/>
+                </Link>
                 {
                 showModifyButtonInfo && 
                     <span className="tournament__buttons__bubble">Modifier le tournoi</span>
                 }
-                <button onMouseOver={() => setShowDetailsButtonInfo(true) } onMouseLeave={() => setShowDetailsButtonInfo(false) }className="tournament__buttons__button"><Eye /></button>
+                <Link 
+                to={`/tournament/${tournament.id}`}
+                onMouseOver={() => setShowDetailsButtonInfo(true) } 
+                onMouseLeave={() => setShowDetailsButtonInfo(false) }className="tournament__buttons__button" data-tournamentid={tournament.id}>
+                    <Eye className="tournament__buttons__button__svg" data-tournamentid={tournament.id}/>
+                </Link>
                 {
                     showDetailsButtonInfo &&
                     <span className="tournament__buttons__bubble">Voir les détails du tournoi</span>
 
                 }
-                <button onMouseOver={() => setShowDeleteButtonInfo(true) } onMouseLeave={() => setShowDeleteButtonInfo(false) } onClick={handleDeleteTournament} className="tournament__buttons__button" data-tournamentid={tournament.id}><Trash2 data-tournamentid={tournament.id}/></button>
+                <button 
+                onMouseOver={() => setShowDeleteButtonInfo(true) } 
+                onMouseLeave={() => setShowDeleteButtonInfo(false) } 
+                onClick={handleDeleteTournament} className="tournament__buttons__button" data-tournamentid={tournament.id}>
+                    <Trash2 data-tournamentid={tournament.id}/>
+                </button>
                 {
                     showDeleteButtonInfo &&
                     <span className="tournament__buttons__bubble">Supprimer le tournoi</span>

@@ -245,6 +245,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleLogout: () => {
         dispatch({type:"LOG_OUT"});
+        localStorage.clear();
     },
     handleCloseModals: () => {
         dispatch({type:"CLOSE_MODALS"});

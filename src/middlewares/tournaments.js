@@ -6,31 +6,20 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case "GET_TOURNAMENTS_FROM_API": {
-
-      const state = store.getState();
+      const userId = localStorage.getItem('id');
       const token = localStorage.getItem('token');
 
       axios({
-        method: 'post',
-        url: `${api}/login`,
-        headers: { "Authorization": `Bearer ${token}` },
-        data: {
-          email: state.user.connection.email,
-          password: state.user.connection.password,
-        },
+          method: 'get',
+          url: `${api}/tournaments/${userId}`,
+          headers: { "Authorization": `Bearer ${token}` },
       })
-        .then(response => {
-          localStorage.setItem('id', response.data.id);
-          localStorage.setItem('token', response.data.token);
-          store.dispatch({type: "GET_TOURNAMENTS_FROM_API_SUCCESS"});
-        })
-        .catch((error) => {
-          console.log(error.response);
-          store.dispatch({ type: "LOG_IN_FAILED", message: error.response.data.message });
-        });
-
+          .then((response) => {
+              store.dispatch({ type: "GET_TOURNAMENTS_FROM_API_SUCCESS", tournaments: response.data.tournaments });
+          })
+          .catch(error => console.log(error));
       break;
-    }
+  }
 
     case "SUBMIT_CREATE_TOURNAMENT_FORM": {
       const state = store.getState();
@@ -81,6 +70,30 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       .then(response => {
         console.log(response);
         window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+      break;
+    }
+
+    case "SUBMIT_MODIFY_TOURNAMENT_FORM": {
+      const token = localStorage.getItem('token');
+      const state = store.getState();
+      const tournamentId = state.tournament.modifyTournament.id;
+
+      axios({
+        method: 'patch',
+        url: `${api}/tournament/modify/${tournamentId}`,
+        headers: { "Authorization": `Bearer ${token}` },
+        data: {
+          tournament: state.tournament.modifyTournament,
+        }
+      })
+      .then(response => {
+        console.log(response);
+        store.dispatch({ type: "SUBMIT_MODIFY_TOURNAMENT_FORM_SUCCESS"});
       })
       .catch((error) => {
         console.error(error);

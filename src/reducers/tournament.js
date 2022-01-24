@@ -12,6 +12,18 @@ const initialState = {
     chips_user: false,
     comment: "",
   },
+  modifyTournament: {
+    name: "",
+    date: "",
+    location: "",
+    nbPlayer: 2,
+    speed: 1,
+    startingStack: 1,
+    buyIn: 1,
+    small_blind: 1,
+    chips_user: false,
+    comment: "",
+  },
   structure: {
 
   },
@@ -81,6 +93,39 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         redirectToTournamentsPage: false,
+      }
+
+    case "CHANGE_MODIFY_TOURNAMENT_INPUTS":
+      return {
+        ...state,
+        modifyTournament: {
+          ...state.modifyTournament,
+          [action.inputName]: action.newValue,
+        }
+      }
+
+    case "ADD_MODIFY_TOURNAMENT":
+      return {
+        ...state,
+        modifyTournament: {
+          id: action.tournament.id,
+          name: action.tournament.name,
+          date: action.tournament.date,
+          location: action.tournament.location,
+          nbPlayer: action.tournament.nb_players,
+          speed: action.tournament.speed,
+          startingStack: action.tournament.starting_stack,
+          buyIn: action.tournament.buy_in,
+          small_blind: action.tournament.small_blind,
+          chips_user: action.tournament.chips_user,
+          comment: action.tournament.comments,
+        }
+      }
+
+    case "SUBMIT_MODIFY_TOURNAMENT_FORM_SUCCESS":
+      return {
+        ...state,
+        redirectToTournamentsPage: true,
       }
 
     default:

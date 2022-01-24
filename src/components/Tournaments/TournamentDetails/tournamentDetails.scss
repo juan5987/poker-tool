@@ -1,0 +1,117 @@
+.tournamentDetails{
+    display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
+	position: relative;
+    background-image: url("../../../assets/images/bg-timer.png");
+    background-size: cover;
+    background-position: center;
+
+    &__body{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #19191E;
+        width: 50%;
+        margin: 0.5rem auto;
+        padding: 2rem;
+        color: white;
+        flex-grow: 1;
+
+        &__title{
+            font-weight: bold;
+            font-size: 2rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            width: 100%;
+            text-align: center;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        &__left{
+            font-size: 1.2rem;
+            
+            &__element{
+                margin-bottom: 1rem;
+
+                &__name{
+                    margin-right: 1rem;
+                    color: #EE581E;
+                }
+
+                &__value{
+                    line-height: 1.5rem;
+                }
+            }
+        }
+
+        &__buttons{
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            margin: 2rem auto;
+
+            &__button{
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: 0.3s ;
+                width: min-content;
+                white-space: nowrap;
+                margin: 1rem auto 1rem auto;
+                background-color: #EE581E;
+                border: 2px solid white;
+                color: #f2f2f2;
+                &:hover{
+                    cursor: pointer;
+                    background-color: #000000;
+                    border: 2px solid #f2f2f2;
+                    color: #EE581E;
+                }
+            }
+        }
+    }
+}
+
+@media all and (max-width: 850px){
+    .tournamentDetails{
+
+        &__body{
+            width: 100%;
+            top: 100px;
+
+            &__left{
+
+                &__element{
+                    width: 350px;
+                }
+            }
+
+            &__buttons{
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 550px){
+    .tournamentDetails{
+        background: #b8b8b8;
+
+        &__body{
+            margin-top: 100px;
+
+            &__buttons{
+                width: 40%;
+
+                &__button{
+                    margin-right: 2rem;
+                }
+            }
+        }
+    }
+}
