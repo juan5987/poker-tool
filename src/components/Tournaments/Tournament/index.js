@@ -9,6 +9,7 @@ import "./tournament.scss";
 const Tournament = ({
     tournament,
     handleDeleteTournament,
+    handleLaunchTournament,
 }) => {
 
     const [showModifyButtonInfo, setShowModifyButtonInfo] = useState(false);
@@ -70,7 +71,10 @@ const Tournament = ({
                     <span className="tournament__buttons__bubble">Supprimer le tournoi</span>
 
                 }
-                <button className="tournament__buttons__launch">Lancer le tournoi</button>
+                <Link 
+                to={`/timer/${tournament.id}`}
+                onClick={handleLaunchTournament} className="tournament__buttons__launch">Lancer le tournoi
+                </Link>
             </div>
         </div >
     )
@@ -84,6 +88,9 @@ const mapDispatchToProps = (dispatch) => ({
     handleDeleteTournament: (event) => {
         const tournamentId = event.target.dataset.tournamentid;
         dispatch({type: "DELETE_TOURNAMENT", tournamentId: tournamentId});
+    },
+    handleLaunchTournament: () => {
+        dispatch({type: "LAUNCH_TOURNAMENT"});
     },
 });
 

@@ -58,7 +58,11 @@ tournaments,
                         </div>
                         <div className="tournamentDetails__body__left__element">
                             <span className="tournamentDetails__body__left__element__name">Commentaire :</span>
-                            <span className="tournamentDetails__body__left__element__value">{tournament.comments ? tournament.comments : "pas de commentaire"}</span>
+                            <span className="tournamentDetails__body__left__element__value--comment">{tournament.comments ? tournament.comments : "pas de commentaire"}</span>
+                        </div>
+                        <div className="tournamentDetails__body__left__element">
+                            <span className="tournamentDetails__body__left__element__name">Status :</span>
+                            <span className="tournamentDetails__body__left__element__value">{tournament.status}</span>
                         </div>
                     </div>
                     <div className="tournamentDetails__body__buttons">

@@ -78,6 +78,8 @@
             background-color: #ee581e;
             color: #f2f2f2;
             border: none;
+            display: flex;
+            align-items: center;
     
             &:hover{
                 cursor: pointer;
