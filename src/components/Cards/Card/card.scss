@@ -26,13 +26,42 @@
   }
 }
 
+@media all and (max-width: 1520px){
+  .card{
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__img{
+      width: fit-content;
+      position: relative;
+      left: 0;
+    }
+  }
+}
+
+@media all and (max-width: 1150px){
+  .card{
+    max-width: 550px;
+
+    &__img{
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      right: -1rem;
+    }
+  }
+}
+
 @media all and (max-width: 480px) {
 
   .card{
     border-radius: 0;
 
     &__img{
-      right: 50px;
+      width: auto;
+      right: 0;
     }
   }
 }

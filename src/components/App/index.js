@@ -29,7 +29,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (localStorage.getItem('token')) dispatch({ type: "LOG_IN_SUCCESS" })
+    if (localStorage.getItem('token')) dispatch({ type: "LOG_IN_SUCCESS" });
   });
 
   return (

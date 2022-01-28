@@ -116,3 +116,9 @@
         }
     }
 }
+
+@media all and (max-height: 1000px){
+    .tournamentDetails{
+        height: auto;
+    }
+}

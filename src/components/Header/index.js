@@ -121,14 +121,14 @@ const Header = ({
                     {
                         !isLogged
                         ?
-                        <button onClick={() => {setIsMenuopen(false); handleOpenConnectionModal()}} type="button" className={isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>
+                        <button onClick={() => {setIsMenuopen(false); handleOpenConnectionModal()}} type="button" className={isLogged ? "header__connexion__button invisible" : "header__responsiveNavbar__connexion"}>
                         Connexion
                         </button>
                         :
                         <button
                             onClick={handleLogout}
                             type="button"
-                            className={!isLogged ? "header__connexion__button invisible" : "header__connexion__button"}>
+                            className={!isLogged ? "header__connexion__button invisible" : "header__responsiveNavbar__connexion"}>
                             Déconnexion
                         </button>
                     }         

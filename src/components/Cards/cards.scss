@@ -1,5 +1,11 @@
 .cards{
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+@media all and (max-width: 1150px){
+  .cards{
+    flex-wrap: wrap;
+  }
 }

@@ -1,3 +1,7 @@
+import sortObjects from "../utils/sortObjects";
+// A REGLER
+
+
 const initialState = {
   tournaments: [],
   prizePool: [],
@@ -47,8 +51,7 @@ const reducer = (state = initialState, action = {}) => {
       }
 
     case "GET_PRIZE_POOL_SUCCESS":
-      console.log("state.prizePool", state.prizePool);
-      console.log("action.prizePool.filter(e => !state.prizePool.some(f => f.id === e.id))", action.prizePool.filter(e => !state.prizePool.some(f => f.id === e.id)))
+      action.prizePool.sort(sortObjects);
       return {
         ...state,
         prizePool: action.prizePool,

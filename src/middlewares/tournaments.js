@@ -28,6 +28,7 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
       const tournamentId = action.tournamentId;
       let tournaments = action.tournaments;
       let modifying = false;
+      console.log(state)
 
       if(!tournaments){
         tournaments = state.tournament.tournaments.filter(el => parseInt(el.id) === parseInt(tournamentId));

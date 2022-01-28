@@ -68,18 +68,40 @@
         position: fixed;
         top: 0;
         bottom: 0;
-        right: -100%;
+        right: -110%;
         z-index: 110;
         margin-top: 92px;
         transition: right .5s ease-out;
+        width: 100vw;
+        box-sizing: border-box;
 
 
         &__element{
             margin-bottom: 2rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
 
             &:hover{
                 color: #ee581e;
+            }
+        }
+
+        &__connexion{
+            background-color: #EE581E;
+            border: 2px solid #000000;
+            color: #f2f2f2;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.8rem;
+            transition: 0.3s ;
+            width: min-content;
+            margin: 0 auto;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
             }
         }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import  { connect } from 'react-redux';
 import './prizePoolInput.scss';
 
@@ -8,7 +8,9 @@ const PrizePoolInput = ({
     handlePrizePoolInputChange,
     handleDeletePrizePoolInputModify,
     tournamentId,
+    prizePool,
   }) => {
+
   return (
       <div className="prizePoolInput">
           <span onClick={handleDeletePrizePoolInputModify} className='prizePoolInput__quit'>X</span>
@@ -21,7 +23,7 @@ const PrizePoolInput = ({
 };
 
 const mapStateToProps = (state, ownprops) => ({
-    
+    prizePool: state.tournament.prizePool,
     position: ownprops.tournamentId
     ?
     state.tournament.prizePool.filter(el => parseInt(el.tournament_id) === parseInt(ownprops.tournamentId))[ownprops.index].position

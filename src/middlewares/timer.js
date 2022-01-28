@@ -32,7 +32,7 @@ const timerMiddleware = (store) => (next) => (action) => {
             const state = store.getState();
             const intervalId = state.timer.intervalId;
 
-            store.dispatch({type: "CLEAR_INTERVAL", intervalId: intervalId});
+            clearInterval(intervalId);
             store.dispatch({type: "LOAD_PREVIOUS_STAGE"});
 
             break;
@@ -42,8 +42,8 @@ const timerMiddleware = (store) => (next) => (action) => {
 
             const state = store.getState();
             const intervalId = state.timer.intervalId;
+            clearInterval(intervalId)
 
-            store.dispatch({type: "CLEAR_INTERVAL", intervalId: intervalId});
             store.dispatch({type: "LOAD_NEXT_STAGE"});
 
             break;

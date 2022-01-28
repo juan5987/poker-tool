@@ -21,7 +21,6 @@ const ModifyTournament = ({
     handleSubmitModifyTournamentForm,
     handleAddPrizePoolInputInModify,
     handleCloseModal,
-    handleResetPrizePoolInputsModify,
     handleOpenPrizePoolModal,
 }) => {
 
@@ -162,7 +161,7 @@ const ModifyTournament = ({
                         <button onClick={handleAddPrizePoolInputInModify} onMouseUp={inputScroll} className="prizePoolModal__addPrice" data-tournamentid={tournamentId}>Ajouter une place payée</button>
                         <div className="prizePoolModal__buttons">
                             <button onClick={handleCloseModal} className="prizePoolModal__buttons__button">Enregistrer</button>
-                            <button onClick={handleResetPrizePoolInputsModify} className="prizePoolModal__buttons__button" data-tournamentid={tournamentId}>Annuler</button>
+                            <button onClick={handleCloseModal} className="prizePoolModal__buttons__button" data-tournamentid={tournamentId}>Annuler</button>
                         </div>
                     </div>
                 )}
@@ -199,10 +198,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleCloseModal: () => {
         dispatch({type:"CLOSE_MODALS"});
-    },
-    handleResetPrizePoolInputsModify: (event) => {
-        dispatch({type:"CLOSE_MODALS"});
-        dispatch({type:"GET_PRIZE_POOL", tournamentId: event.target.dataset.tournamentid});
     },
     handleOpenPrizePoolModal: (event) => {
         event.preventDefault();

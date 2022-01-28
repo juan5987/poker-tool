@@ -10,6 +10,7 @@ const Tournament = ({
     tournament,
     handleDeleteTournament,
     handleLaunchTournament,
+    handleGetPrizePool,
 }) => {
 
     const [showModifyButtonInfo, setShowModifyButtonInfo] = useState(false);
@@ -51,6 +52,8 @@ const Tournament = ({
                 }
                 <Link 
                 to={`/tournament/${tournament.id}`}
+                data-tournamentid={tournament.id}
+                onClick={handleGetPrizePool}
                 onMouseOver={() => setShowDetailsButtonInfo(true) } 
                 onMouseLeave={() => setShowDetailsButtonInfo(false) }className="tournament__buttons__button" data-tournamentid={tournament.id}>
                     <Eye className="tournament__buttons__button__svg" data-tournamentid={tournament.id}/>
@@ -93,6 +96,10 @@ const mapDispatchToProps = (dispatch) => ({
         const tournamentId = event.target.dataset.tournamentid;
         dispatch({type: "LAUNCH_TOURNAMENT", tournamentId: tournamentId});
     },
+    handleGetPrizePool: (event) => {
+        const tournamentId = event.target.dataset.tournamentid;
+        dispatch({type:"GET_PRIZE_POOL", tournamentId: tournamentId});
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tournament);
