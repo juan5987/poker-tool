@@ -58,11 +58,7 @@ const initialState = {
         { quantity: 50, color: '#78c56c', value: 1000 },
     ],
     prizePool: [
-        { position: 1, amount: 50 },
-        { position: 2, amount: 30 },
-        { position: 3, amount: 20 },
-        { position: 4, amount: 10 },
-        { position: 5, amount: 10 },
+        { position: 1, amount: 0 },
     ]
 }
 
@@ -71,6 +67,12 @@ const initialState = {
 const timer = (state = initialState, action = {}) => {
 
     switch (action.type) {
+        case "CLOSE_MODALS":
+            return {
+                ...state,
+                isQuitTimerModalOpen: false,
+            }
+
         case "SHOW_QUIT_TIMER_MODAL":
             return {
                 ...state,
@@ -348,32 +350,39 @@ const timer = (state = initialState, action = {}) => {
             }
 
         case "LAUNCH_TOURNAMENT_SUCCESS":
-            console.log(action.tournament);
             return {
                 ...state,
-                secondesLeft: action.tournament[0].speed * 60,
+                secondesLeft: action.tournament.speed * 60,
                 currentTournament: {
-                    name: action.tournament[0].name,
-                    minute: action.tournament[0].speed,
+                    name: action.tournament.name,
+                    minute: action.tournament.speed,
                     seconde: 0,
                     stage: 1,
-                    smallBlind: action.tournament[0].small_blind,
-                    bigBlind: action.tournament[0].small_blind * 2,
+                    smallBlind: action.tournament.small_blind,
+                    bigBlind: action.tournament.small_blind * 2,
+                    buyIn: action.tournament.buy_in,
+                    startingStack: action.tournament.starting_stack,
+                    nbPlayer: action.tournament.nb_players,
+                    rebuyHour: action.tournament.rebuyHour,
+                    rebuyMinute: action.tournament.rebuyMinute,
                 },
                 currentValues: {
-                    minute: action.tournament[0].speed,
+                    minute: action.tournament.speed,
                     seconde: 0,
                     stage: 1,
                     previousSB: 0,
                     previousBB: 0,
-                    smallBlind: action.tournament[0].small_blind,
-                    bigBlind: action.tournament[0].small_blind * 2,
-                    nextSB: action.tournament[0].Structures[state.currentValues.stage].small_blind,
-                    nextBB: action.tournament[0].Structures[state.currentValues.stage].big_blind,
+                    smallBlind: action.tournament.smallBlind,
+                    bigBlind: action.tournament.smallBlind * 2,
+                    nextSB: action.tournament.structure[state.currentValues.stage].smallBlind,
+                    nextBB: action.tournament.structure[state.currentValues.stage].bigBlind,
+                    rebuyHour: action.tournament.rebuyHour,
+                    rebuyMinute: action.tournament.rebuyMinute,
                 },
-                currentStructure: action.tournament[0].Structures,
-                currentChips: action.tournament[0].user.chips,
-                cashPrice: action.tournament[0].cashprices,
+                currentStructure: action.tournament.structure,
+                currentChips: action.chips,
+                cashPrice: action.tournament.cashprices,
+                prizePool: action.prizePool,
             }
 
         case "LAUNCH_REBUY_TIMER":
@@ -381,23 +390,23 @@ const timer = (state = initialState, action = {}) => {
                 ...state,
                 currentValues: {
                     ...state.currentValues,
-                    rebuyHour: 
-                    state.currentValues.rebuyHour > 0 && state.currentValues.rebuyMinute === 0
-                    ?
-                    state.currentValues.rebuyHour - 1
-                    :
-                    state.currentValues.rebuyHour,
+                    rebuyHour:
+                        state.currentValues.rebuyHour > 0 && state.currentValues.rebuyMinute === 0
+                            ?
+                            state.currentValues.rebuyHour - 1
+                            :
+                            state.currentValues.rebuyHour,
 
-                    rebuyMinute: 
-                    state.currentValues.rebuyMinute > 0 & state.currentValues.rebuyHour >= 0
-                    ?
-                    state.currentValues.rebuyMinute - 1
-                    :
-                        state.currentValues.rebuyMinute === 0 & state.currentValues.rebuyHour > 0
-                        ?
-                        59
-                        :
-                        0
+                    rebuyMinute:
+                        state.currentValues.rebuyMinute > 0 & state.currentValues.rebuyHour >= 0
+                            ?
+                            state.currentValues.rebuyMinute - 1
+                            :
+                            state.currentValues.rebuyMinute === 0 & state.currentValues.rebuyHour > 0
+                                ?
+                                59
+                                :
+                                0
                 },
                 intervalIdRebuy: action.intervalId,
             }

@@ -1,3 +1,5 @@
+import { structureCreator } from "../utils/structureCreator";
+
 const timerMiddleware = (store) => (next) => (action) => {
 
     switch (action.type) {
@@ -19,6 +21,7 @@ const timerMiddleware = (store) => (next) => (action) => {
             const state = store.getState();
             const intervalId = state.timer.intervalId;
 
+            clearInterval(intervalId);
             store.dispatch({type: "RESET_CURRENT_VALUES", intervalId: intervalId});
 
             break;
@@ -74,6 +77,34 @@ const timerMiddleware = (store) => (next) => (action) => {
             }
 
             next(action);
+            break;
+        }
+
+        case "LAUNCH_TOURNAMENT": {
+            const state = store.getState();
+            const tournaments = state.tournament.tournaments;
+            const currentTournament = tournaments.find(tournament => tournament.id === parseInt(action.tournamentId));
+            const prizePool = state.tournament.prizePool.filter(el => parseInt(el.tournament_id) === parseInt(currentTournament.id));
+            console.log(prizePool);
+            const structure = structureCreator(
+                currentTournament.small_blind,
+                currentTournament.nb_players,
+                currentTournament.starting_stack,
+            );
+            if(currentTournament.rebuy){
+                currentTournament.rebuyMinute = parseInt(currentTournament.rebuy.substring(2));
+                currentTournament.rebuyHour = parseInt(currentTournament.rebuy.charAt(0));
+            } else {
+                currentTournament.rebuyMinute = 0;
+                currentTournament.rebuyHour = 0;
+            }
+            
+            currentTournament.structure = structure;
+            console.log(currentTournament)
+            const chips = currentTournament.chips_user ? state.chip.chips : [];
+
+            store.dispatch({type: "LAUNCH_TOURNAMENT_SUCCESS", tournament: currentTournament, chips: chips, prizePool: prizePool});
+
             break;
         }
         

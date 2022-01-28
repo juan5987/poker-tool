@@ -1,7 +1,9 @@
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import dateFormat from "dateformat";
-import { i18n } from '../../utils/dateformat';
+import Modal from 'components/Modal';
+import { Link } from "react-router-dom";
+import sound from '../../assets/sound/bell.mp3';
 import {
     Play,
     Pause,
@@ -39,8 +41,12 @@ const Timer = ({
     rebuyHour,
     rebuyMinute,
     prizePool,
+    isAudioPlaying,
+    handleShowQuitTimerModal,
+    isQuitTimerModalOpen,
+    handleCloseQuitTimerModal,
 }) => {
-
+    const bell = new Audio(sound);
     const currentTime = timeHour + " : " + timeMinute;
     const dispatch = useDispatch();
 
@@ -48,25 +54,31 @@ const Timer = ({
         dispatch({ type: "REFRESH_TIME" });
     }, [])
 
+    useEffect(() => {
+        if (isAudioPlaying) {
+            bell.play();
+        }
+    });
+
     return (
         <div className="timer">
             <div className="timer__header">
                 <h2 className="timer__header__title">{tournament.name}</h2>
                 <span className="timer__header__date">{dateFormat(tournament.date, 'dd mmmm yyyy')}</span>
                 <span className="timer__header__time">{currentTime}</span>
+                <span onClick={handleShowQuitTimerModal} className="timer__header__quit">X</span>
             </div>
             <div className="timer__main">
                 <div className="timer__main__prizepool">
                     <h2 className="timer__main__prizepool__title">Prize Pool</h2>
                     <ul className="timer__main__prizepool__container">
-                        {/* BOUCLE SUR PRIZE POOL */}
                         <li className="timer__main__prizepool__container__element">
                             <div className="timer__main__prizepool__container__element__name">Total :</div>
-                            <div className="timer__main__prizepool__container__element__value"> 120€</div>
+                            <div className="timer__main__prizepool__container__element__value">{prizePool.reduce((partialSum, a) => partialSum + a.amount, 0) + "€"}</div>
                         </li>
                         {prizePool.map((price, i) => (
-                            <li className="timer__main__prizepool__container__element" key={price.position+price.amount}>
-                                <div className="timer__main__prizepool__container__element__name">{i === 0 ? `${price.position}er :` : `${price.position}ème :`}</div>
+                            <li className="timer__main__prizepool__container__element" key={price.position + price.amount}>
+                                <div className="timer__main__prizepool__container__element__name" >{i === 0 ? `${price.position}er :` : `${price.position}ème :`}</div>
                                 <div className="timer__main__prizepool__container__element__value">{price.amount + " €"}</div>
                             </li>
                         ))}
@@ -106,7 +118,7 @@ const Timer = ({
                     <div className="timer__main__info__container">
                         <div className="timer__main__info__container__element">
                             <div className="timer__main__info__container__element__name">Jetons total :</div>
-                            <div className="timer__main__info__container__element__value">{tournament.startingStack * tournament.nbPlayer}</div>
+                            <div className="timer__main__info__container__element__value">{parseInt(tournament.startingStack) * parseInt(tournament.nbPlayer)}</div>
                         </div>
                         <div className="timer__main__info__container__element">
                             <div className="timer__main__info__container__element__name">Tapis de départ :</div>
@@ -142,8 +154,8 @@ const Timer = ({
                 </div>
             </div>
             <div className="timer__footer">
-                {chips.map(chip => (
-                    <div className="timer__footer__chip">
+                {chips.map((chip) => (
+                    <div className="timer__footer__chip" key={chip.color}>
                         <svg className="timer__footer__chip__img" fill={chip.color} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 296.477 296.477" style={{ enableBackground: 'new 0 0 296.477 296.477' }} xmlSpace="preserve">
                             <g>
                                 <path d="M244.63,35.621c-21.771-18.635-47.382-29.855-73.767-33.902C121.871-5.797,70.223,11.421,35.622,51.847
@@ -172,6 +184,33 @@ const Timer = ({
                     </div>
                 ))}
             </div>
+            <Modal
+                isOpen={isQuitTimerModalOpen}
+                title='Quitter le tournoi'
+                content={(
+                    <div className="timerModal">
+                        <p>Voulez-vous vraiment retourner à l'accueil ?</p>
+                        <div className="timerModal__buttons">
+                            <Link to='/'>
+                                <button
+                                onClick={handleCloseQuitTimerModal}
+                                onMouseUp={handleResetTimer}
+                                    type="submit"
+                                    className="timerModal__buttons__button"
+                                >
+                                    OK
+                                </button>
+                            </Link>
+                            <button
+                                className="timerModal__buttons__button"
+                                onClick={handleCloseQuitTimerModal}
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </div>
+                )}
+            />
         </div>
     )
 };
@@ -194,6 +233,7 @@ const mapStateToProps = (state) => ({
     rebuyHour: state.timer.currentValues.rebuyHour,
     rebuyMinute: state.timer.currentValues.rebuyMinute,
     prizePool: state.timer.prizePool,
+    isQuitTimerModalOpen: state.timer.isQuitTimerModalOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -219,6 +259,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     handleSkipForward: () => {
         dispatch({ type: "SKIP_FORWARD" });;
+    },
+    handleShowQuitTimerModal: () => {
+        dispatch({ type: "SHOW_QUIT_TIMER_MODAL" });
+    },
+    handleCloseQuitTimerModal: () => {
+        dispatch({ type: "CLOSE_QUIT_TIMER_MODAL" });
     },
 });
 

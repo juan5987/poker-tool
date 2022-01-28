@@ -73,7 +73,7 @@ const Tournament = ({
                 }
                 <Link 
                 to={`/timer/${tournament.id}`}
-                onClick={handleLaunchTournament} className="tournament__buttons__launch">Lancer le tournoi
+                onClick={handleLaunchTournament} className="tournament__buttons__launch" data-tournamentid={tournament.id}>Lancer le tournoi
                 </Link>
             </div>
         </div >
@@ -89,8 +89,9 @@ const mapDispatchToProps = (dispatch) => ({
         const tournamentId = event.target.dataset.tournamentid;
         dispatch({type: "DELETE_TOURNAMENT", tournamentId: tournamentId});
     },
-    handleLaunchTournament: () => {
-        dispatch({type: "LAUNCH_TOURNAMENT"});
+    handleLaunchTournament: (event) => {
+        const tournamentId = event.target.dataset.tournamentid;
+        dispatch({type: "LAUNCH_TOURNAMENT", tournamentId: tournamentId});
     },
 });
 

@@ -40,6 +40,7 @@ Modal.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
     handleCloseConnectionModal: () => {
+        dispatch({type:"RESET_PRIZE_POOL_INPUTS"});
         dispatch({type: "CLOSE_MODALS"});
     }
 })

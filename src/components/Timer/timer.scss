@@ -1,7 +1,6 @@
 .timer{
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
     width: 100vw;
     height: 100vh;
     background-color: #19191E;
@@ -14,6 +13,7 @@
         justify-content: space-between;
         padding: 1rem;
         font-size: 2.5rem;
+        position: relative;
 
         &__title{
             flex-grow: 1;
@@ -27,6 +27,26 @@
         &__time{
             flex-grow: 1;
             text-align: right;
+        }
+
+        &__quit{
+            
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 4px solid #f2f2f2;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+            margin-left: 3rem;
+
+            &:hover{
+                color: #EE581E;
+                border: 4px solid #EE581E;
+                cursor: pointer;
+            }
         }
     }
 
@@ -97,10 +117,18 @@
                 &__minute{
                     text-align: right;
                     width: 200px;
+
+                    &::selection {
+                        background-color: transparent;
+                    }
+                    
                 }
                 &__seconde{
                     text-align: left;
                     width: 200px;
+                    &::selection {
+                        background-color: transparent;
+                    }
                 }
             }
 
@@ -137,6 +165,10 @@
                 padding-bottom: 2rem;
                 text-align: center;
                 border-bottom: 2px solid white;
+                
+                &::selection {
+                    background-color: transparent;
+                }
             }
 
             &__container{
@@ -236,4 +268,33 @@
             color: white;
         }
     }
+}
+
+.timerModal{
+
+    &__buttons{
+        display: flex;
+        justify-content: center;
+
+        &__button{
+        background-color: #ee581e;
+        color: #f2f2f2;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border: 2px solid #19191e;
+        margin-top: 1rem;
+
+        &:first-child{
+            margin-right: 1rem;
+        }
+
+        &:hover{
+            cursor: pointer;
+            background-color: #19191e;
+            border: 2px solid #f2f2f2;
+            color: #EE581E;
+        }
+    }}
 }

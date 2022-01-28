@@ -2,7 +2,7 @@ function roundnum(num, round){
     return Math.round(num / round)*round;
     }
 
- export const structureCreator = (smallestChip, nbPlayer, startingStack, stageTime) => {
+ export const structureCreator = (smallestChip, nbPlayer, startingStack) => {
 
     const totalChips = nbPlayer * startingStack;
     let stage = 1;
@@ -30,4 +30,4 @@ function roundnum(num, round){
 };
 
 //voila comment lancer la fonction
-structureCreator(25, 5, 10000, 20);
+structureCreator(25, 5, 10000);

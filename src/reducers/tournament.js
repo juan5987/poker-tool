@@ -1,5 +1,6 @@
 const initialState = {
   tournaments: [],
+  prizePool: [],
   createTournament: {
     name: "",
     date: "",
@@ -9,8 +10,10 @@ const initialState = {
     startingStack: 1,
     buyIn: 1,
     small_blind: 1,
+    rebuy: "",
     chips_user: false,
     comment: "",
+    prizePool: [],
   },
   modifyTournament: {
     name: "",
@@ -21,14 +24,17 @@ const initialState = {
     startingStack: 1,
     buyIn: 1,
     small_blind: 1,
+    rebuy: "",
     chips_user: false,
     comment: "",
+    prizePool: [],
   },
   structure: {
 
   },
   errorMessage: "",
   redirectToTournamentsPage: false,
+  openPrizePoolModal: false,
 }
 
 
@@ -38,6 +44,14 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tournaments: action.tournaments,
+      }
+
+    case "GET_PRIZE_POOL_SUCCESS":
+      console.log("state.prizePool", state.prizePool);
+      console.log("action.prizePool.filter(e => !state.prizePool.some(f => f.id === e.id))", action.prizePool.filter(e => !state.prizePool.some(f => f.id === e.id)))
+      return {
+        ...state,
+        prizePool: action.prizePool,
       }
 
     case "SHOW_CREATE_TOURNAMENT_MODAL":
@@ -62,6 +76,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         showCreateTournamentModal: false,
+        openPrizePoolModal: false,
       }
 
     case "SUBMIT_CREATE_TOURNAMENT_FORM_SUCCESS":
@@ -78,6 +93,7 @@ const reducer = (state = initialState, action = {}) => {
           small_blind: 1,
           chips_user: false,
           comment: "",
+          prizePool: [],
         },
         errorMessage: "",
         redirectToTournamentsPage: true,
@@ -87,6 +103,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         errorMessage: action.message,
+      }
+
+    case "SUBMIT_CREATE_TOURNAMENT_PRIZE_POOL_SUCCESS":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          prizePool: [
+            ...state.createTournament.prizePool,
+            action.prizePool,
+          ]
+        }
       }
 
     case "CANCEL_REDIRECT":
@@ -126,6 +154,97 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         redirectToTournamentsPage: true,
+      }
+
+    case "OPEN_PRIZE_POOL_MODAL":
+      return {
+        ...state,
+        openPrizePoolModal: true,
+      }
+
+    case "PRIZE_POOL_INPUT_CHANGE":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          prizePool: state.createTournament.prizePool.map(
+            (price, i) => i === action.index
+              ? {
+                ...price,
+                [action.inputName]: parseInt(action.newValue),
+              }
+              : price
+          ),
+        }
+      }
+
+    case "PRIZE_POOL_INPUT_CHANGE_MODIFY":
+      return {
+        ...state,
+        prizePool: state.prizePool.filter(el => parseInt(el.tournament_id) === parseInt(action.tournamentId)).map(
+          (price, i) => i === action.index
+            ? {
+              ...price,
+              [action.inputName]: parseInt(action.newValue),
+            }
+            : price
+        ),
+      }
+
+    case "ADD_PRIZE_POOL_MODAL":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          prizePool: [
+            ...state.createTournament.prizePool,
+            { position: state.createTournament.prizePool.length + 1, amount: 0, tournament_id: null },
+          ]
+        }
+      }
+
+    case "ADD_PRIZE_POOL_MODAL_IN_MODIFY":
+      return {
+        ...state,
+        prizePool: [
+          ...state.prizePool,
+          { position: state.prizePool.length + 1, amount: 0, tournament_id: action.tournamentId },
+        ]
+      }
+
+    case "DELETE_PRIZE_POOL_INPUT":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          prizePool: state.createTournament.prizePool.filter((price, i) => i !== action.index),
+        }
+      }
+
+    case "DELETE_PRIZE_POOL_INPUT_MODIFY":
+      return {
+        ...state,
+        prizePool: state.prizePool.filter((price, i) => i !== action.index),
+      }
+
+    case "RESET_PRIZE_POOL_INPUTS":
+      return {
+        ...state,
+        createTournament: {
+          ...state.createTournament,
+          prizePool: [],
+        }
+      }
+    
+    case "ADD_MODIFIED_PRIZE_POOL_IN_STATE":
+      console.log(state.prizePool.filter(el => el.id !== action.prizePool.id))
+      console.log(action.prizePool)
+      return {
+        ...state,
+        prizePool: [
+          ...state.prizePool.filter(el => el.id !== action.prizePool.id),
+          action.prizePool,
+        ]
       }
 
     default:

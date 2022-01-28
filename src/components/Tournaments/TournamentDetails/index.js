@@ -8,10 +8,12 @@ import "./tournamentDetails.scss";
 
 const TournamentDetails = ({
 tournaments,
+prizePools,
 }) => {
     const history = useHistory();
     const { id } = useParams();
     const tournament = tournaments.find(tournament => parseInt(tournament.id) === parseInt(id));
+    const prizePool = prizePools.filter(price => price.tournament_id === (parseInt(tournament.id)));
 
     if(tournament){
         return (
@@ -50,7 +52,13 @@ tournaments,
                         </div>
                         <div className="tournamentDetails__body__left__element">
                             <span className="tournamentDetails__body__left__element__name">Petite Blind: </span>
-                            <span className="tournamentDetails__body__left__element__value">{tournament.small_blind + " €"}</span>
+                            <span className="tournamentDetails__body__left__element__value">{tournament.small_blind}</span>
+                        </div>
+                        <div className="tournamentDetails__body__left__element">
+                            <span className="tournamentDetails__body__left__element__name">Prize pool: </span>
+                            {
+                                prizePool.map((price, i )=> <span className="tournamentDetails__body__left__element__value" key={price.position+price.amount*i}>{price.position + `${price.position === 1 ? "er: ": "ème: "}` + price.amount + " € " }</span>)
+                            }
                         </div>
                         <div className="tournamentDetails__body__left__element">
                             <span className="tournamentDetails__body__left__element__name">J'utilise mes jetons: </span>
@@ -81,6 +89,7 @@ tournaments,
 
 const mapStateToProps = (state) => ({
     tournaments: state.tournament.tournaments,
+    prizePools: state.tournament.prizePool,
 });
 
 const mapDispatchToProps = (dispatch) => ({

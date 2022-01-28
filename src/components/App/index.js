@@ -1,6 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 
 //components
 import Home from 'components/Home';

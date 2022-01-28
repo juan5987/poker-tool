@@ -1,0 +1,44 @@
+.prizePoolInput{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    position: relative;
+
+    &__quit{
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        border: 2px solid white;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        text-align: center;
+        font-size: 0.8rem;
+
+        &:hover{
+            color: #EE581E;
+            cursor: pointer;
+            border: 2px solid #EE581E;
+        }
+    }
+
+    &__label{
+        color: #EE581E;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0.2rem;
+    }
+
+    &__input{
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 0.4rem 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+}

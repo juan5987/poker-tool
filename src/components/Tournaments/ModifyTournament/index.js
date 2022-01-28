@@ -1,11 +1,13 @@
 import { connect, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import dateFormat from "dateformat";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import Modal from "components/Modal";
+import PrizePoolInput from "../CreateTournament/PrizePoolInput";
 import "./modifyTournament.scss";
 
 const ModifyTournament = ({
@@ -13,8 +15,14 @@ const ModifyTournament = ({
     modifyTournament,
     errorMessage,
     redirectToTournamentsPage,
+    openPrizePoolModal,
+    prizePool,
     handleChangeModifyTournamentInputs,
     handleSubmitModifyTournamentForm,
+    handleAddPrizePoolInputInModify,
+    handleCloseModal,
+    handleResetPrizePoolInputsModify,
+    handleOpenPrizePoolModal,
 }) => {
 
     const tournamentId = useParams().id;
@@ -22,6 +30,11 @@ const ModifyTournament = ({
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const inputsContainer = React.createRef();
+    const inputScroll = () => {
+        inputsContainer.current.scrollIntoView();
+    };
     
     useEffect(() => {
         if(redirectToTournamentsPage){
@@ -94,6 +107,20 @@ const ModifyTournament = ({
                                 name="small_blind" className="createTournament__form__inputContainer__input" type="number" min={1} value={modifyTournament.small_blind} required/>
                             </div>
                             <div className="createTournament__form__inputContainer">
+                                <label htmlFor="rebuy" className="createTournament__form__inputContainer__label">Rebuy </label>
+                                <select onChange={handleChangeModifyTournamentInputs} name="rebuy" id="rebuy" className="createTournament__form__inputContainer__input">
+                                    <option value="">Pas de rebuy </option>
+                                    <option value="0h30">0h30</option>
+                                    <option value="1H00">1H00</option>
+                                    <option value="1H30">1H30</option>
+                                    <option value="2H00">2H00</option>
+                                    <option value="2H30">2H30</option>
+                                    <option value="3H00">3H00</option>
+                                    <option value="3H30">3H30</option>
+                                    <option value="4H00">4H00</option>
+                                </select>
+                            </div>
+                            <div className="createTournament__form__inputContainer">
                                 <label htmlFor="chipsUser" className="createTournament__form__inputContainer__label">Utiliser vos jetons ? </label>
                                 <input 
                                 onChange={handleChangeModifyTournamentInputs} 
@@ -103,7 +130,11 @@ const ModifyTournament = ({
                                 <label htmlFor="comment" className="createTournament__form__inputContainer__label">Commentaire (facultatif)</label>
                                 <textarea 
                                 onChange={handleChangeModifyTournamentInputs} 
-                                rows={5} name="comment" className="createTournament__form__inputContainer__input" value={modifyTournament.comment}/>
+                                rows={3} name="comment" className="createTournament__form__inputContainer__input" value={modifyTournament.comment}/>
+                            </div>
+                            <div className="createTournament__form__inputContainer">
+                                <label htmlFor="addPrizePool" className="createTournament__form__inputContainer__label">Prize Pool</label>
+                                <button onClick={handleOpenPrizePoolModal} name="addPrizePool" className="createTournament__form__inputContainer__addPrizePool" data-tournamentid={tournamentId}>Modifier les places payées</button>
                             </div>
                         </div>
                     </div>
@@ -117,6 +148,25 @@ const ModifyTournament = ({
                 </form>
             </main>
             <Footer />
+            <Modal
+                isOpen={openPrizePoolModal}
+                title="Prize Pool"
+                content={(
+                    <div className="prizePoolModal">
+                        <div className="prizePoolModal__inputs">
+                        {
+                            prizePool && prizePool.filter(el => parseInt(el.tournament_id) === parseInt(tournamentId)).map((price, i) => <PrizePoolInput tournamentId={tournamentId} index={i} key={i} />)
+                        }
+                        <div className="prizePoolModal__inputs__scroll" ref={inputsContainer}></div>
+                        </div>
+                        <button onClick={handleAddPrizePoolInputInModify} onMouseUp={inputScroll} className="prizePoolModal__addPrice" data-tournamentid={tournamentId}>Ajouter une place payée</button>
+                        <div className="prizePoolModal__buttons">
+                            <button onClick={handleCloseModal} className="prizePoolModal__buttons__button">Enregistrer</button>
+                            <button onClick={handleResetPrizePoolInputsModify} className="prizePoolModal__buttons__button" data-tournamentid={tournamentId}>Annuler</button>
+                        </div>
+                    </div>
+                )}
+            />
         </div>
     )
     } else {
@@ -130,6 +180,8 @@ const mapStateToProps = (state) => ({
     modifyTournament: state.tournament.modifyTournament,
     errorMessage: state.tournament.errorMessage,
     redirectToTournamentsPage: state.tournament.redirectToTournamentsPage,
+    openPrizePoolModal: state.tournament.openPrizePoolModal,
+    prizePool: state.tournament.prizePool,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -140,6 +192,22 @@ const mapDispatchToProps = (dispatch) => ({
         event.preventDefault();
         const tournamentId = event.target.dataset.tournamentid;
         dispatch({type: "SUBMIT_MODIFY_TOURNAMENT_FORM", tournamentId: tournamentId });
+    },
+    handleAddPrizePoolInputInModify: (event) => {
+        event.preventDefault();
+        dispatch({ type: "ADD_PRIZE_POOL_MODAL_IN_MODIFY", tournamentId: event.target.dataset.tournamentid });
+    },
+    handleCloseModal: () => {
+        dispatch({type:"CLOSE_MODALS"});
+    },
+    handleResetPrizePoolInputsModify: (event) => {
+        dispatch({type:"CLOSE_MODALS"});
+        dispatch({type:"GET_PRIZE_POOL", tournamentId: event.target.dataset.tournamentid});
+    },
+    handleOpenPrizePoolModal: (event) => {
+        event.preventDefault();
+        dispatch({ type: "OPEN_PRIZE_POOL_MODAL" });
+        dispatch({type:"GET_PRIZE_POOL", tournamentId: event.target.dataset.tournamentid});
     },
 });
 

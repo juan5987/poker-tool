@@ -63,6 +63,28 @@
                 padding: 0.4rem 0.8rem;
                 margin-bottom: 1rem;
             }
+
+            &__addPrizePool{
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-size: 1rem;
+                font-weight: bold;
+                transition: 0.3s ;
+                width: 100%;
+                white-space: nowrap;
+                margin: 0.2rem auto 1rem auto;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+                
+                
+                &:hover{
+                    cursor: pointer;
+                    background-color: #EE581E;
+                    border: 1px solid white;
+                    color: #f2f2f2;
+                }
+            }
         }
     
         &__buttons{
@@ -79,10 +101,11 @@
                 transition: 0.3s ;
                 width: min-content;
                 white-space: nowrap;
-                margin: 1rem auto 1rem auto;
+                margin: 3rem auto 1rem auto;
                 background-color: #EE581E;
                 border: 2px solid white;
                 color: #f2f2f2;
+
                 &:hover{
                     cursor: pointer;
                     background-color: #000000;
@@ -98,6 +121,69 @@
             border: 1px solid red;
             padding: 1rem;
             margin-top: 1rem;
+        }
+    }
+}
+
+.prizePoolModal{
+
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+
+    &__inputs{
+        height: 550px;
+        overflow-y: auto;
+        position: relative;
+
+        &__scroll{
+            height: 180px;
+        }
+    }
+
+    &__addPrice{
+        
+        background-color: black;
+        color: #EE581E;
+        width: min-content;
+        margin: 0 auto;
+        white-space: nowrap;
+        border: 1px solid white;
+        padding: 0.5rem;
+        border-radius: 15px;
+        margin-top: 1rem;
+        font-weight: bold;
+
+        &:hover{
+            background-color: #EE581E;
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        justify-content: space-around;
+
+        &__button{
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s ;
+            width: min-content;
+            white-space: nowrap;
+            margin: 2rem auto 1rem auto;
+            background-color: #EE581E;
+            border: 2px solid white;
+            color: #f2f2f2;
+
+            &:hover{
+                cursor: pointer;
+                background-color: #000000;
+                border: 2px solid #f2f2f2;
+                color: #EE581E;
+            }
         }
     }
 }
