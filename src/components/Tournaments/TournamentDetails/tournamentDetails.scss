@@ -42,6 +42,7 @@
                 &__name{
                     margin-right: 1rem;
                     color: #EE581E;
+                    font-weight: bold;
                 }
 
                 &__value{
@@ -50,6 +51,7 @@
                     &--comment{
                         display: block;
                         width: 500px;
+                        margin-top: 0.5rem;
                     }
                 }
             }

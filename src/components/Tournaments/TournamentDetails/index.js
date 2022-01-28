@@ -55,6 +55,10 @@ prizePools,
                             <span className="tournamentDetails__body__left__element__value">{tournament.small_blind}</span>
                         </div>
                         <div className="tournamentDetails__body__left__element">
+                            <span className="tournamentDetails__body__left__element__name">Durée du rebuy: </span>
+                            <span className="tournamentDetails__body__left__element__value">{tournament.rebuy}</span>
+                        </div>
+                        <div className="tournamentDetails__body__left__element">
                             <span className="tournamentDetails__body__left__element__name">Prize pool: </span>
                             {
                                 prizePool.map((price, i )=> <span className="tournamentDetails__body__left__element__value" key={price.position+price.amount*i}>{price.position + `${price.position === 1 ? "er: ": "ème: "}` + price.amount + " € " }</span>)

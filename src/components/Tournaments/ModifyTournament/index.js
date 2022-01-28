@@ -108,7 +108,7 @@ const ModifyTournament = ({
                             </div>
                             <div className="createTournament__form__inputContainer">
                                 <label htmlFor="rebuy" className="createTournament__form__inputContainer__label">Rebuy </label>
-                                <select onChange={handleChangeModifyTournamentInputs} name="rebuy" id="rebuy" className="createTournament__form__inputContainer__input">
+                                <select onChange={handleChangeModifyTournamentInputs} name="rebuy" id="rebuy" className="createTournament__form__inputContainer__input" value={modifyTournament.rebuy}>
                                     <option value="">Pas de rebuy </option>
                                     <option value="0h30">0h30</option>
                                     <option value="1H00">1H00</option>

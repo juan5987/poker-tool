@@ -195,7 +195,6 @@ const tournamentsMiddleware = (store) => (next) => (action) => {
           }
         })
           .then(response => {
-            // store.dispatch({ type: "ADD_MODIFIED_PRIZE_POOL_IN_STATE", prizePool: response.data.prizePool });
             store.dispatch({type: "GET_TOURNAMENTS_FROM_API"});
           })
           .catch((error) => {

@@ -15,6 +15,7 @@ const Tournaments = ({
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({ type: "GET_TOURNAMENTS_FROM_API" });
+        dispatch({type: "GET_CHIPS_FROM_API"}); 
     }, []);
 
     return (

@@ -144,6 +144,7 @@ const reducer = (state = initialState, action = {}) => {
           speed: action.tournament.speed,
           startingStack: action.tournament.starting_stack,
           buyIn: action.tournament.buy_in,
+          rebuy: action.tournament.rebuy,
           small_blind: action.tournament.small_blind,
           chips_user: action.tournament.chips_user,
           comment: action.tournament.comments,

@@ -9,7 +9,7 @@ import './cards.scss'
 //assets
 import chip from 'assets/images/chips.jpg';
 import tournament from 'assets/images/tournoi.jpg';
-import timer from 'assets/images/squared_timer.png';
+import timer from 'assets/images/newTimer.PNG';
 
 const Cards = () => {
   const cards = [

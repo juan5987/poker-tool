@@ -17,6 +17,9 @@
 
         &__title{
             flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 65%;
         }
 
         &__date{
@@ -266,6 +269,7 @@
 
         &:hover{
             color: white;
+            cursor: pointer;
         }
     }
 }
@@ -297,4 +301,118 @@
             color: #EE581E;
         }
     }}
+}
+
+
+@media all and (max-width: 1350px){
+
+    .timer{
+
+        &__main{
+            justify-content: space-around;
+
+            &__timer, &__info{
+                width: 50%;
+            }
+
+            &__timer{
+                border-left: 0;
+            }
+
+            &__prizepool{
+                display: none;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 1000px){
+
+    .timer{
+
+        &__header{
+
+            &__date, &__time{
+                display: none;
+            }
+
+            &__title{
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            &__quit{
+                min-width: 30px;
+                margin-left: 1rem;
+            }
+
+        }
+
+        &__main{
+            justify-content: center;
+
+            &__timer{
+                width: 100%;
+                border-right: none;
+            }
+
+            &__info{
+                display: none;
+            }
+
+            &__prizepool{
+                display: none;
+            }
+        }
+
+        &__blinds{
+
+            &__previous, &__next{
+                display: none;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 1000px){
+
+    .timer{
+
+        &__main{
+
+            &__timer{
+                flex-grow: 1;
+
+                &__numbers{
+                    font-size: 7rem;
+                }
+
+                &__stage{
+
+                    &__text{
+                        font-size: 2.5rem;
+                        position: relative;
+                        top: 0.5rem;
+                    }
+                }
+
+                &__navigation{
+                    margin-top: 0;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+        &__blinds{
+            flex-grow: 1;
+
+            &__actual{
+                font-size: 3rem;
+            }
+        }
+
+        &__footer{
+            display: none;
+        }
+    }
 }

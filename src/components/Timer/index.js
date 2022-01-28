@@ -1,6 +1,7 @@
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import dateFormat from "dateformat";
+import i18n from '../../utils/dateformat';
 import Modal from 'components/Modal';
 import { Link } from "react-router-dom";
 import sound from '../../assets/sound/bell.mp3';
