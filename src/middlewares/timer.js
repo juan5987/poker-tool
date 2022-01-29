@@ -85,7 +85,7 @@ const timerMiddleware = (store) => (next) => (action) => {
             const tournaments = state.tournament.tournaments;
             const currentTournament = tournaments.find(tournament => tournament.id === parseInt(action.tournamentId));
             const prizePool = state.tournament.prizePool.filter(el => parseInt(el.tournament_id) === parseInt(currentTournament.id));
-            console.log(prizePool);
+
             const structure = structureCreator(
                 currentTournament.small_blind,
                 currentTournament.nb_players,
@@ -100,7 +100,7 @@ const timerMiddleware = (store) => (next) => (action) => {
             }
             
             currentTournament.structure = structure;
-            console.log(currentTournament)
+
             const chips = currentTournament.chips_user ? state.chip.chips : [];
 
             store.dispatch({type: "LAUNCH_TOURNAMENT_SUCCESS", tournament: currentTournament, chips: chips, prizePool: prizePool});

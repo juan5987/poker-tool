@@ -52,9 +52,13 @@ const reducer = (state = initialState, action = {}) => {
 
     case "GET_PRIZE_POOL_SUCCESS":
       action.prizePool.sort(sortObjects);
+      state.prizePool.sort(sortObjects);
       return {
         ...state,
-        prizePool: action.prizePool,
+        prizePool: [
+          ...state.prizePool,
+          ...action.prizePool.filter(e => !state.prizePool.some(f => f.tournament_id === e.tournament_id)),
+      ],
       }
 
     case "SHOW_CREATE_TOURNAMENT_MODAL":

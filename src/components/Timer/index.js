@@ -1,5 +1,6 @@
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useParams } from "react-router";
 import dateFormat from "dateformat";
 import i18n from '../../utils/dateformat';
 import Modal from 'components/Modal';
@@ -50,6 +51,10 @@ const Timer = ({
     const bell = new Audio(sound);
     const currentTime = timeHour + " : " + timeMinute;
     const dispatch = useDispatch();
+    const tournamentId = useParams().id;
+    console.log(tournamentId)
+
+    console.log(prizePool.filter(el => el.tournament_id == tournamentId));
 
     useEffect(() => {
         dispatch({ type: "REFRESH_TIME" });
@@ -235,6 +240,7 @@ const mapStateToProps = (state) => ({
     rebuyMinute: state.timer.currentValues.rebuyMinute,
     prizePool: state.timer.prizePool,
     isQuitTimerModalOpen: state.timer.isQuitTimerModalOpen,
+    isAudioPlaying: state.timer.isAudioPlaying,
 });
 
 const mapDispatchToProps = (dispatch) => ({
